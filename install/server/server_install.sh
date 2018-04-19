@@ -121,6 +121,8 @@ scp $adminset_dir/install/server/tellme.service /usr/lib/systemd/system
 systemctl daemon-reload
 chkconfig tellme on
 service tellme start
+pip install gunicorn
+ln -s /usr/local/python3/bin/gunicorn /usr/bin/gunicorn
 
 
 # 安装nginx
@@ -131,3 +133,14 @@ scp $tellme_dir/install/server/nginx/tellme.conf /etc/nginx/conf.d
 scp $tellme_dir/install/server/nginx/nginx.conf /etc/nginx
 service nginx start
 nginx -s reload
+
+
+# 完成安装
+echo "##############install finished###################"
+systemctl daemon-reload
+service mariadb restart
+service tellme restart
+service sshd restart
+echo "please access website http://server_ip"
+echo "you have installed adminset successfully!!!"
+echo "################################################"
