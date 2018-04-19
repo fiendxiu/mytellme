@@ -1,0 +1,10 @@
+{% extends "parent/base_cid.html" %}
+
+{% block contact_key %}
+<th>联系人</th>
+<th>联系电话</th>
+{% endblock %}
+{% block contact_value %}
+<td>{{ site.mastercontact }}</td>
+<td>{{ site.masterphone }}</td>
+{% endblock %}

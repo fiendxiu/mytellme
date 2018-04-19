@@ -1,0 +1,45 @@
+{% include "parent/base_filehead.html" %}
+	{% include 'parent/base_head.html' %}
+
+	{% block editjtid %}
+	{% endblock %}
+	{% if jtlist %}
+	{% include "parent/base_cidlist.html" %}
+	{% else %}
+	<div id="jtid" style="margin-top:20px">
+		<table class="table table-striped table-bordered table-condensed">
+		<tr>
+			<th>集团ID</th><th>集团名称</th><th>状态</th><th>创建时间</th>{% block jituanhead %}{% endblock %}
+	        </tr>	
+		{% for jt in room.object_list %}
+		<tr>
+			<td><a href="/jtid/{{ jt.jtid }}/">{{ jt.jtid }}</a></td>
+	                <td>{{ jt.jtname }}</td>
+        		<td><span style="color:red"> {{ jt.status }}</span> </td>
+	        	<td>{{ jt.create_date }}</td>
+                        {% block jituanbody %}{% endblock %}
+		</tr>	
+		{% endfor %}
+		</table>
+	</div>
+        {% block pages %}
+        <div id="pages">
+        {% if room.has_previous %}
+                {% if room.previous_page_number %}
+                <a href="?page={{ room.previous_page_number }}" >上一页</a>
+                {% endif %}
+        {% else %}
+                上一页
+        {% endif %}第{{ room.number }}页
+        {% if room.has_next %}
+                <a href="?page={{ room.next_page_number }}">下一页</a>
+        {% else %}
+                下一页
+        {% endif %}
+        <span style="margin-left:20px">共 {{ room.paginator.num_pages }} 页 合计 {{ room.paginator.count }} 条记录</span>
+        </div>
+        {% endblock %}
+	{% endif %}
+
+</body>
+</html>

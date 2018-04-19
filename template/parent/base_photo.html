@@ -1,0 +1,39 @@
+{% include "parent/base_filehead.html" %}
+
+    {# form 的请求方法为 post #}
+    {# enctype 属性为 "multipart/form-data" 才能正确发送 #}
+    {# 发送到的网址 save_profile 将在下面 url 中定义 #}
+    <form enctype="multipart/form-data" method="POST">{% csrf_token %}
+    {# 上传图片的表单 #}
+	{% for field in form %}
+		{% ifequal field.label 'Siteid' %}
+		<input type="hidden" name="siteid"  id="id_siteid" value="{{ id }}" />
+		<h3>图片站点ID：{{ id }}</h3>
+		{% else %}
+        	{{ field }}
+		{% endifequal %}
+	{% endfor %}
+	{# 按钮，type 属性需设为 "submit" #}
+	<br /><button type="submit" class="btn btn-info">上传</button>
+    </form>
+
+	<div class="row" style="margin-top:20px">
+		{% for image in imageurl %}
+		<div class="col-sm-2 col-md-2">
+			<a href="javascript:change_img('/{{ image.imageurl }}')" class="thumbnail"><img src="/{{ image.imageurl }}" ></a>
+			<div class="caption">
+				<strong>上传者：{{ image.uploader }} -- {{ image.create_date }}</strong>
+				<a href="/trashfile/photo/{{ image.id }}">删除这张照片</a>
+			</div>
+		</div>
+		{% endfor %}
+		<img src="" id="bigimage" style="margin-top:40px"/><br><br>
+	</div>
+
+<script type="text/javascript" language="javascript">
+function change_img(source){    
+       document.getElementById("bigimage").src=source;
+}
+</script>
+</body>
+</html>

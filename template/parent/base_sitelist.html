@@ -1,0 +1,49 @@
+<div style="margin-top:20px;">
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>SiteID</th><th>站点名</th><th>地址</th>
+	{% block contact_key %}
+	<th>主联系人</th><th>主联系电话</th><th>主联系电邮</th><th>更多联系信息</th>
+	{% endblock %}
+	<th>状态</th>
+    </tr>
+    {% for site in room.object_list %}
+    <tr>
+        <td><a href="/cid/{{ site.cid.cid }}/?collapse={{ site.siteid }}">{{ site.siteid }}</a></td>
+        <td>{{ site.sitename }}</td>
+        <td>{{ site.siteaddr }}</td> 
+	{% block contact_value %}
+        <td>{{ site.mastercontact }}</td>
+        <td>{{ site.masterphone }}</td>
+        <td>{{ site.masteremail }}</td>
+        <td>{{ site.ocontacts }}</td>
+	{% endblock %}
+        <td><span style="color:red"> {{ site.status }}</span></td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+        {% block pages %}
+        <div id="pages">
+        {% if room.has_previous %}
+                {% if curl %}
+                <a href="{{ curl }}&page={{ room.previous_page_number }}">上一页</a>
+                {% else %}
+                <a href="?page={{ room.previous_page_number }}" >上一页</a>
+                {% endif %}
+        {% else %}
+                上一页
+        {% endif %}第{{ room.number }}页
+        {% if room.has_next %}
+                {% if curl %}
+                <a href="{{ curl }}&page={{ room.next_page_number }}">下一页</a>
+                {% else %}
+                <a href="?page={{ room.next_page_number }}">下一页</a>
+                {% endif %}
+        {% else %}
+                下一页
+        {% endif %}
+        <span style="margin-left:20px">共 {{ room.paginator.num_pages }} 页 合计 {{ room.paginator.count }} 条记录</span>
+        </div>
+        {% endblock %}

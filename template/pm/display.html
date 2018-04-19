@@ -1,0 +1,10 @@
+{% extends "pm/cid.html" %}
+
+{% block collapse %}
+	{% ifequal collapse site.siteid %}
+	<div id="svc_{{ site.siteid }}" class="collapse in">
+	{% else %}
+	<div id="svc_{{ site.siteid }}" class="collapse">
+        {% endifequal %}
+{% endblock %}
+

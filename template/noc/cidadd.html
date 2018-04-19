@@ -1,0 +1,42 @@
+{% include "parent/base_filehead.html" %}
+	{% include "parent/base_head.html" %}
+
+        <div id="cid" style="margin-top:20px">
+		{% if error %}
+                <div class="form-group">
+			<p>{{ error }}</p>
+                </div>
+		{% endif %}
+		<form method="post" class="form-horizontal">{% csrf_token %}
+		{% for field in form %}
+                <div class="form-group">
+			{% ifequal field.name 'cid' %}
+                        <label class="col-sm-2 control-label">
+                                {{ field.label }}
+                        </label>
+                        <div class="col-sm-6">
+                                <input type="text" name="cid"  id="id_cid" value="{{ newcid }}" />
+                        </div>
+			{% else %}
+			<label class="col-sm-2 control-label">
+				{{ field.label }}
+			</label> 
+			<div class="col-sm-6">
+				{{ field }}
+				{% if field.help_text %}
+				<p class="help-inline"><small>{{ field.help_text }}</small></p>
+				{% endif %}
+			</div>
+			{% endifequal %}
+		</div>
+		{% endfor %}
+                <div class="form-group">
+			<div class="col-sm-offset-2 col-sm-6">
+				<a href="javascript:history.back()" class="btn btn-success">返回</a>
+				<button class="btn btn-primary" type="submit">添加</button>
+			</div>
+                </div>
+		</form>
+        </div>
+</body>
+</html>

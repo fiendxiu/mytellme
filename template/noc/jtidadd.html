@@ -1,0 +1,25 @@
+{% include "parent/base_filehead.html" %}
+	{% include "parent/base_head.html" %}
+
+        <div id="jtid" style="margin-top:20px">
+		<form method="post" class="form-horizontal">{% csrf_token %}
+		{% for field in form %}
+                <div class="form-group">
+			<label class="col-sm-2 control-label">
+				{{ field.label }}
+			</label> 
+			<div class="col-sm-6">
+				{{ field }}
+				{% if field.help_text %}
+				<p class="help-inline"><small>{{ field.help_text }}</small></p>
+				{% endif %}
+			</div>
+		</div>
+		{% endfor %}
+			<div class="col-sm-offset-2 col-sm-6">
+				<button class="btn btn-primary" type="submit">添加</button>
+			</div>
+		</form>
+        </div>
+</body>
+</html>

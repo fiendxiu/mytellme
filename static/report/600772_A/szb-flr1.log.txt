@@ -1,0 +1,31 @@
+﻿[root@Fnet_Center fnetlink_jumpserver]# grep -rn 'bothwin@szb-flr1#' log/shell_cmd/20171207/ 
+log/shell_cmd/20171207/jerryw/192.168.141.109_30677.log:180:bothwin@szb-flr1# set interfaces ethernet eth0exit             
+[root@Fnet_Center fnetlink_jumpserver]# grep -rn 'bothwin@szb-flr1#' log/shell_cmd/20171208/ 
+log/shell_cmd/20171208/dennisz/192.168.151.156_8600.log:715:bothwin@szb-flr1# set interfaces openvpn vtun4bothwin@szb-flr1# set interfaces openvpn vtun40172 traffic-policy out 'OUT-4M'
+log/shell_cmd/20171208/dennisz/192.168.151.156_8600.log:717:bothwin@szb-flr1# set interfaces input ifb40172 traffic-policy out 'OUT-4M'
+log/shell_cmd/20171208/dennisz/192.168.151.156_8600.log:719:bothwin@szb-flr1# commit
+log/shell_cmd/20171208/dennisz/192.168.151.156_8600.log:721:bothwin@szb-flr1# sa
+log/shell_cmd/20171208/dennisz/192.168.151.156_8600.log:725:bothwin@szb-flr1# exit
+log/shell_cmd/20171208/dennisz/192.168.151.156_10828.log:2094:bothwin@szb-flr1# set interfaces openvpn vtun40172 traffic-policy out 'OUT-2M'
+log/shell_cmd/20171208/dennisz/192.168.151.156_10828.log:2096:bothwin@szb-flr1# set interfaces openvpn vtusudo show conf comm |grep 40172   
+log/shell_cmd/20171208/dennisz/192.168.151.156_10828.log:2099:bothwin@szb-flr1# sudo show conf comm |grep exit                   
+log/shell_cmd/20171208/dennisz/192.168.151.156_10828.log:2103:bothwin@szb-flr1# exit      
+log/shell_cmd/20171208/dennisz/192.168.151.156_10828.log:2107:bothwin@szb-flr1# dis
+log/shell_cmd/20171208/dennisz/192.168.151.156_10828.log:2112:bothwin@szb-flr1# exit dis
+log/shell_cmd/20171208/dennisz/192.168.151.156_10828.log:2180:bothwin@szb-flr1# set interfaces openvpn vtun40172 traffic-policy out 'OUT-2M'
+log/shell_cmd/20171208/dennisz/192.168.151.156_10828.log:2182:bothwin@szb-flr1# set interfaces input ifb40172 traffic-policy out 'OUT-2M'
+log/shell_cmd/20171208/dennisz/192.168.151.156_10828.log:2184:bothwin@szb-flr1# commit
+log/shell_cmd/20171208/dennisz/192.168.151.156_10828.log:2186:bothwin@szb-flr1# sa
+log/shell_cmd/20171208/dennisz/192.168.151.156_10828.log:2190:bothwin@szb-flr1# end
+log/shell_cmd/20171208/dennisz/192.168.151.156_10828.log:2195:bothwin@szb-flr1# exit
+log/shell_cmd/20171208/allenx/192.168.141.195_21117.log:51:bothwin@szb-flr1# del protocols static route 103.99.74.94/32
+log/shell_cmd/20171208/allenx/192.168.141.195_21117.log:56:bothwin@szb-flr1# del protocols static route 103.99.74.63/32
+log/shell_cmd/20171208/allenx/192.168.141.195_21117.log:60:bothwin@szb-flr1# del protocols static route 103.99.74.51/32 
+log/shell_cmd/20171208/allenx/192.168.141.195_21117.log:63:bothwin@szb-flr1# del protocols static route 10.10.141.170/32
+log/shell_cmd/20171208/allenx/192.168.141.195_21117.log:65:bothwin@szb-flr1# del protocols static route 10.10.141.169/32
+log/shell_cmd/20171208/allenx/192.168.141.195_21117.log:67:bothwin@szb-flr1# del track name to601822a1
+log/shell_cmd/20171208/allenx/192.168.141.195_21117.log:69:bothwin@szb-flr1# del interfaces openvpn vtun40169
+log/shell_cmd/20171208/allenx/192.168.141.195_21117.log:71:bothwin@szb-flr1# del interfaces input ifb40169
+log/shell_cmd/20171208/allenx/192.168.141.195_21117.log:73:bothwin@szb-flr1# commit
+log/shell_cmd/20171208/allenx/192.168.141.195_21117.log:75:bothwin@szb-flr1# save
+log/shell_cmd/20171208/allenx/192.168.141.195_21117.log:79:bothwin@szb-flr1# exit

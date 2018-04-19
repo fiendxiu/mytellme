@@ -1,0 +1,32 @@
+{% extends "parent/base_cid.html" %}
+
+	{% block cid %}
+		{% if error %}
+                <div class="form-group">
+			<p>{{ error }}</p>
+                </div>
+		{% endif %}
+		<form method="post" class="form-horizontal">{% csrf_token %}
+                        <table class="table table-bordered">
+			{% for field in form %}
+				<tr>
+					{% ifequal field.name 'cid' %}
+					<input type="hidden" name="cid"  id="id_cid" value="{{ field.value }}" />
+                                        <th>{{ field.label }}</th>
+                                        <td>{{ cid.cid }}</td>
+					{% else %}
+						<th>{{ field.label }}</th>
+						<td>{{ field }}</td>
+					{% endifequal %}
+				</tr>
+			{% endfor %}
+				<tr>
+					<th>操作</th>
+					<td><a href="javascript:history.back()" class="btn btn-xs btn-success">返回</a>
+					<button class="btn btn-xs btn-primary" type="submit">保存修改</button></td>
+				</tr>
+                        </table>
+		</form>
+        {% endblock %}
+</body>
+</html>

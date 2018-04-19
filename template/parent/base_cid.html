@@ -1,0 +1,405 @@
+{% include "parent/base_filehead.html" %}
+	{% include "parent/base_head.html" %}
+
+	{% block addcid %}
+	{% endblock %}
+	<div id="cid" style="margin-top:20px;">
+        {% block cid %}
+		<table class="table table-bordered">
+			<tr style="background:#eee">
+				<th>CID</th>
+                                <th>合同名</th>
+                                <th>安装名义</th>
+                                <th>业务邮箱</th>
+                                <th>状态</th>
+                                <th>创建时间</th>
+				<th>文件</th>
+				{% block editcidhead %}{% endblock %}
+			</tr>
+			<tr>
+                                <td>{{ cid.cid }}</td>
+				<td>{{ cid.contractname }}</td>
+                                <td>{{ cid.installname }}</td>
+                                <td>{{ cid.sales }}</td>
+                                <td>{{ cid.status }}</td>
+                                <td>{{ cid.create_date }}</td>
+				<td><a href="/report/{{ cid.cid }}" target="_blank"><span class="glyphicon glyphicon-file"></span><span class="badge">{{ cid.reports }}</span></a></td>
+				{% block editcidbody %}{% endblock %}
+			</tr>
+		</table>
+                <table class="table table-bordered  table-condensed" style="margin-top:-20px">
+                        <tr style="background:#eee">
+                        	{% if cid.mrtg %}
+                        	<th>MRTG链接</th><th>MRTG帐号密码</th>
+                        	{% endif %}
+                                {% if cid.netflow %}
+                                <th>Netflow链接</th><th>Netflow帐号密码</th>
+                                {% endif %}
+                                {% if cid.apppass %}
+                                <th>APP帐号密码</th>
+                                {% endif %}
+                        </tr>
+                        <tr>
+                                {% if cid.mrtg %}
+                                <td>{{ cid.mrtg }}</td><td>{{ cid.mrtgpass }}</td>
+                                {% endif %}
+                                {% if cid.netflow %}
+                                <td>{{ cid.netflow }}</td><td>{{ cid.netflowpass }}</td>
+                                {% endif %}
+                                {% if cid.apppass %}
+                                <td>{{ cid.apppass }}</td>
+                                {% endif %}
+                        </tr>
+                </table>
+	{% endblock %}
+	</div>
+	<div id="site">
+        {% block site %}
+		<table class="table table-bordered table-hover">
+			<tr style="background:#eee">
+				<th>SITEID</th>
+				<th>站点名</th>
+				<th>地址</th>
+				{% block contact_key %}
+				<th>主联系人</th>
+				<th>主联系电话</th>
+				<th>主联系电邮</th>
+				<th>更多联系信息</th>
+				{% endblock %}
+				<th>服务内容</th>
+				<th>文件</th>
+				<th>状态</th>
+				{% block editsitehead %}{% endblock %}
+			</tr>
+                        {% for site in cid.site %}
+			<tr>
+				<td>
+					<div>
+						<a data-toggle="collapse" href="#svc_{{ site.siteid }}">
+							{{ site.siteid }}
+						</a>
+					</div>
+				</td>
+				<td>{{ site.sitename }}</td>
+				<td>{{ site.siteaddr }}</td>
+				{% block contact_value %}
+				<td>{{ site.mastercontact }}</td>
+				<td>{{ site.masterphone }}</td>
+				<td>{{ site.masteremail }}</td>
+				<td>{{ site.ocontacts }}</td>
+                                {% endblock %}
+				<td>{% if site.fast %}<span class="label label-primary">FASTIP</span>{% endif %}
+                                {% if site.flan %}<span class="label label-primary">组网</span>{% endif %}
+				{% if site.nni %}<span class="label label-primary">NNI</span>{% endif %}
+                                {% if site.local %}<span class="label label-primary">厂商线路</span>{% endif %}
+                                {% if site.si %}<span class="label label-primary">SI</span>{% endif %}
+                                {% if site.monitor %}<span class="label label-primary">监控线路</span>{% endif %}</td>
+				<td><a href="/photo/{{ site.siteid }}" target="_blank"><span class="glyphicon glyphicon-picture"></span><span class="badge">{{ site.images }}</span></a></td>
+				<td>{{ site.status }}</td>
+				{% block editsitebody %} {% endblock %}
+			</tr>
+                        {% endfor %}
+		</table>
+        {% endblock %}
+	</div>
+
+	{% block svcedit %}
+        {% for site in cid.site %}
+	{% block collapse %}
+        <div id="svc_{{ site.siteid }}" class="collapse">
+	{% endblock %}
+		<div class="panel-body">
+			<h3>{{ site.siteid }}站点</h3>
+                        {% if site.fast %}
+                        {% block fast_service %}
+			<table class="table table-bordered table-hover">
+				<tr style="background:#eee">
+					<th>FASTIP</th>
+				</tr>
+				<tr style="background:#eee">
+					<th>ID</th>
+					<th>PE</th>
+					<th>接口</th>
+					<th>WAN IP</th>
+					<th>HK IP</th>
+					<th>带宽</th>
+                                        <th>备PE</th>
+                                        <th>备接口</th>
+                                        <th>备WANIP</th>
+					<th>公司服务编号</th>
+					<th>状态</th>
+					{% block editfasthead %}{% endblock %}
+				</tr>
+                                {% for fast in site.fast %}
+				<tr>
+					<td>{% if fast.fasttag %}
+                                        <div class="dropdown">
+                                                <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ fast.svcid }}</a><span class="label label-info">tag</span>
+                                                <ul class="dropdown-menu">
+                                                        {% for tagname,tagvalue in fast.fasttag.items %}
+                                                        <li><b>{{ tagname }}</b><a>{{ tagvalue }}</a>
+                                                        {% endfor %}
+                                                </ul>
+                                        </div>
+					{% else %}{{ fast.svcid }}{% endif %}
+                                        </td>
+					<td>{{ fast.fastpe }}</td>
+					<td>{{ fast.fastport }}</td>
+					<td>{{ fast.fastwanip }}</td>
+					<td>{{ fast.hkip }}</td>
+					<td>{{ fast.bandwidth }}</td>
+                                        <td>{{ fast.bkpe }}</td>
+                                        <td>{{ fast.bkport }}</td>
+                                        <td>{{ fast.bkwanip }}</td>
+					<td>{{ fast.servicenumber }}</td>
+					<td>{{ fast.status }}</td>
+					{% block editfastbody %}{% endblock %}
+				</tr>
+                                {% endfor %}
+			</table>
+                        {% endblock %}
+                        {% endif %}{% if site.flan %}
+                        {% block flan_service %}
+                        <table class="table table-bordered table-hover">
+                                <tr style="background:#eee">
+                                        <th>组网</th>
+                                </tr>
+                                <tr style="background:#eee">
+                                        <th>ID</th>
+                                        <th>PE</th>
+                                        <th>接口</th>
+                                        <th>WAN IP</th>
+                                        <th>LAN IP</th>
+                                        <th>带宽</th>
+                                        <th>备PE</th>
+                                        <th>备接口</th>
+                                        <th>备WANIP</th>
+                                        <th>公司服务编号</th>
+                                        <th>状态</th>
+					{% block editflanhead %}{% endblock %}
+                                </tr>
+                                {% for flan in site.flan %}
+                                <tr>
+                                        <td>{% if flan.flantag %}
+			                <div class="dropdown">
+                        			<a href="" class="dropdown-toggle" data-toggle="dropdown">{{ flan.svcid }}</a><span class="label label-info">tag</span>
+                        			<ul class="dropdown-menu">
+                        				{% for tagname,tagvalue in flan.flantag.items %}
+				                        <li><b>{{ tagname }}</b><a>{{ tagvalue }}</a>
+				                        {% endfor %}
+                        			</ul>
+                			</div>    
+                                        {% else %}{{ flan.svcid }}{% endif %}
+                                        </td>
+                                        <td>{{ flan.flanpe }}</td>
+                                        <td>{{ flan.flanport }}</td>
+                                        <td>{{ flan.flanwanip }}</td>
+                                        <td>{{ flan.lanip }}</td>
+                                        <td>{{ flan.bandwidth }}</td>
+                                        <td>{{ flan.bkpe }}</td>
+                                        <td>{{ flan.bkport }}</td>
+                                        <td>{{ flan.bkwanip }}</td>
+                                        <td>{{ flan.servicenumber }}</td>
+                                        <td>{{ flan.status }}</td>
+					{% block editflanbody %}{% endblock %}
+                                </tr>
+                                {% endfor %}
+                        </table>
+                        {% endblock %}
+                        {% endif %}{% if site.nni %}
+                        {% block nni_service %}
+                        <table class="table table-bordered table-hover">
+                                <tr style="background:#eee">
+                                        <th>NNI</th>
+                                </tr>
+                                <tr style="background:#eee">
+                                        <th>ID</th>
+                                        <th>PE</th>
+                                        <th>PORT</th>
+                                        <th>WAN IP</th>
+					<th>带宽</th>
+					<th>运营商</th>
+					<th>报障名义</th>
+					<th>报障信息</th>
+					<th>POP地址</th>
+					<th>线路编号</th>
+                                        <th>公司服务编号</th>
+                                        {% block editnnihead %}{% endblock %}
+                                </tr>
+                                {% for nni in site.nni %}
+                                <tr>
+                                        <td>{% if nni.nnitag %}
+                                        <div class="dropdown">
+                                                <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ nni.svcid }}</a><span class="label label-info">tag</span>
+                                                <ul class="dropdown-menu">
+                                                        {% for tagname,tagvalue in nni.nnitag.items %}
+                                                        <li><b>{{ tagname }}</b><a>{{ tagvalue }}</a>
+                                                        {% endfor %}
+                                                </ul>
+                                        </div>
+                                        {% else %}{{ nni.svcid }}{% endif %}
+                                        </td>
+                                        <td>{{ nni.pe }}</td>
+                                        <td>{{ nni.port }}</td>
+                                        <td>{{ nni.wanip }}</td>
+                                        <td>{{ nni.bandwidth }}</td>
+                                        <td>{{ nni.nnisp }}</td>
+                                        <td>{{ nni.nniname }}</td>
+                                        <td>{{ nni.nniguard }}</td>
+                                        <td>{{ nni.nniaddr }}</td>
+                                        <td>{{ nni.nninumber }}</td>
+                                        <td>{{ nni.servicenumber }}</td>
+                                        {% block editnnibody %}{% endblock %}
+                                </tr>
+                                {% endfor %}
+                        </table>
+                        {% endblock %}
+                        {% endif %}{% if site.local %}
+                        {% block local_service %}
+                        <table class="table table-bordered table-hover">
+                                <tr style="background:#eee">
+                                        <th>厂商线路</th>
+                                </tr>
+                                <tr style="background:#eee">
+                                        <th>ID</th>
+                                        <th>厂商/线路类型</th>
+                                        <th>上传/下载</th>
+                                        <th>报障名义</th>
+                                        <th>报障信息</th>
+                                        <th>A端地址</th>
+                                        <th>B端地址</th>
+                                        <th>线路编号</th>
+                                        <th>公司服务编号</th>
+                                        <th>状态</th>
+                                        {% block editlocalhead %}{% endblock %}
+                                </tr>
+                                {% for local in site.local %}
+                                <tr>
+                                        <td>{% if local.localtag %}
+                                        <div class="dropdown">
+                                                <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ local.svcid }}</a><span class="label label-info">tag</span>
+                                                <ul class="dropdown-menu">
+                                                        {% for tagname,tagvalue in local.localtag.items %}
+                                                        <li><b>{{ tagname }}</b><a>{{ tagvalue }}</a>
+                                                        {% endfor %}
+                                                </ul>
+                                        </div>
+                                        {% else %}{{ local.svcid }}{% endif %}
+                                        </td>
+                                        <td>{{ local.localsp }}</td>
+                                        <td>{{ local.bandwidth }}</td>
+                                        <td>{{ local.localname }}</td>
+                                        <td>{{ local.localguard }}</td>
+                                        <td>{{ local.localaddra }}</td>
+                                        <td>{{ local.localaddrb }}</td>
+                                        <td>{{ local.localnumber }}</td>
+                                        <td>{{ local.servicenumber }}</td>
+                                        <td>{{ local.status }}</td>
+                                        {% block editlocalbody %}{% endblock %}
+                                </tr>
+                                {% endfor %}
+                        </table>
+                        {% endblock %}
+                        {% endif %}{% if site.si %}
+                        {% block si_service %}
+			<table class="table table-bordered table-hover">
+				<tr style="background:#eee">
+					<th>SI</th>
+				</tr>
+				<tr style="background:#eee">
+                                        <th>服务ID</th>
+					<th>服务项</th>
+					<th>服务清单</th>
+					<th>公司服务编号</th>
+					<th>状态</th>
+					{% block editsihead %}{% endblock %}
+				</tr>
+                                {% for si in site.si %}
+				<tr>
+                                        <td>{% if si.sitag %}
+                                        <div class="dropdown">
+                                                <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ si.svcid }}</a><span class="label label-info">tag</span>
+                                                <ul class="dropdown-menu">
+                                                        {% for tagname,tagvalue in si.sitag.items %}
+                                                        <li><b>{{ tagname }}</b><a>{{ tagvalue }}</a>
+                                                        {% endfor %}
+                                                </ul>
+                                        </div>
+                                        {% else %}{{ si.svcid }}{% endif %}
+                                        </td>
+					<td>{{ si.siname }}</td>
+					<td>{{ si.sicontent }}</td>
+					<td>{{ si.servicenumber }}</td>
+					<td>{{ si.status }}</td>
+					{% block editsibody %}{% endblock %}
+				</tr>
+                                {% endfor %}
+			</table>
+                        {% endblock %}
+                        {% endif %}{% if site.monitor %}
+                        {% block monitor_service %}
+                        <table class="table table-bordered table-hover">
+                                <tr style="background:#eee">
+                                        <th>监控线路</th>
+                                </tr>
+                                <tr style="background:#eee">
+                                        <th>ID</th>
+                                        <th>监控对象</th>
+                                        <th>监控IP</th>
+                                        <th>状态</th>
+					{% block editmonitorhead %}{% endblock %}
+                                </tr>
+                                {% for monitor in site.monitor %}
+                                <tr>
+                                        <td>{% if monitor.monitortag %}
+                                        <div class="dropdown">
+                                                <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ monitor.svcid }}</a><span class="label label-info">tag</span>
+                                                <ul class="dropdown-menu">
+                                                        {% for tagname,tagvalue in monitor.monitortag.items %}
+                                                        <li><b>{{ tagname }}</b><a>{{ tagvalue }}</a>
+                                                        {% endfor %}
+                                                </ul>
+                                        </div>
+                                        {% else %}{{ monitor.svcid }}{% endif %}
+                                        </td>
+                                        <td>{{ monitor.monitorobj }}</td>
+                                        <td>{{ monitor.monitorip }}</td>
+                                        <td>{{ monitor.status }}</td>
+					{% block editmonitorbody %}{% endblock %}
+                                </tr>
+                                {% endfor %}
+                        </table>
+                        {% endblock %}
+                        {% endif %}
+		</div>
+        </div>
+        {% endfor %}
+	{% endblock %}
+
+	<div id="footer" style="margin-top:30px;">
+		<hr /> 
+		<p class="text-center">Copyright © 2017 fnetlink.com.hk. All rights reserved.</p>
+		<button id="btnRT" type="button" class="btn btn-default" style="position:fixed;left:5%;bottom:12%;">
+			<span class="glyphicon glyphicon-chevron-up"></span>
+		</button>
+	</div>
+
+<script type="text/javascript">
+	$(function() { 
+		$('.collapse').on('shown.bs.collapse', function() {
+			$('html,body').animate({scrollTop:$('#'+$(this).attr('id')).offset().top},500);
+        	})
+	});
+	$(function() {
+                $('#btnRT').hide()
+                $(window).scroll(function() {
+                        var st = $(document).scrollTop();
+                        (st > 0)?$('#btnRT').show():$('#btnRT').hide();
+                })
+		$('#btnRT').click(function() {
+			$('html,body').animate({scrollTop:0},120);
+		})
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends "parent/base_cid.html" %}
+
+	{% block svcedit %}
+		<form method="post" class="form-horizontal">{% csrf_token %}
+                        <table class="table table-bordered">
+				{% for field in form %}
+				<tr>
+					{% ifequal field.name 'siteid' %}
+					<input type="hidden" name="siteid"  id="id_siteid" value="{{ field.value }}" />
+					{% else %}
+                                                {% ifequal field.name 'svcid' %}
+                                                <input type="hidden" name="svcid" id="id_svcid" value="{{ field.value }}" />
+                                                <th>{{ field.label }}</th>
+                                                <td>{{ field.value }}</td>
+                                               	{% else %}
+							{% ifequal field.name 'fastport' %}
+							<th>{{ field.label }}</th>
+							<td>
+								{{ field }}
+								{% if portformat %}
+								{% else %}
+								<span style="margin-left:20px">*tunnel类型的接口必须是Tunnel123，tun123，vtun123的格式</span>
+								{% endif %}
+							</td>
+							{% else %}
+								{% ifequal field.name 'flanport' %}
+								<th>{{ field.label }}</th>
+								<td>
+									{{ field }}
+									{% if portformat %}
+									{% else %}
+									<span style="margin-left:20px">*tunnel类型的接口必须是Tunnel123，tun123>，vtun123的格式</span>
+									{% endif %}
+								</td>
+								{% else %}
+								<th>{{ field.label }}</th>
+								<td>{{ field }}</td>
+								{% endifequal %}
+	                                        	{% endifequal %}
+						{% endifequal %}
+					{% endifequal %}
+				</tr>
+				{% endfor %}
+				<tr>
+					<th>操作</th>
+					<td><a href="javascript:history.back()" class="btn btn-xs btn-success">返回</a>
+					<button class="btn btn-xs btn-primary" type="submit">保存修改</button></td>
+				</tr>
+                        </table>
+		</form>
+        {% endblock %}
+</body>
+</html>

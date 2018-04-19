@@ -1,0 +1,15 @@
+{% include "parent/base_filehead.html" %}
+        <center>
+        <a> 欢迎使用tellme v2.0</a>
+	<hr />
+        {% if error %}
+                <p style="color: red;">你输入的用户名密码不正确！！</p>
+        {% endif %}
+        <form class="form-horizontal" action="" method="POST"> {% csrf_token %} 
+                <p>用户名:<input type="text" name="username"  placeholder="输入用户名"></p>
+                <p>密码:&nbsp;&nbsp;<input type="password" name="password" placeholder="输入密码"></p>
+                <button class="btn btn-xs" type="submit">登录</button>&nbsp; &nbsp; <button class="btn btn-xs" type="reset">重置</button>
+        </form>
+        </center>
+</body>
+</html>

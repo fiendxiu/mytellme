@@ -1,0 +1,39 @@
+<div style="margin-top:20px;">
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>ID</th><th>标签名</th><th>标签值</th>
+    </tr>
+    {% for tag in room.object_list %}
+	    <tr>
+		<td><a href="/cid/{{ tag.svcid.siteid.cid.cid }}/?collapse={{ tag.svcid.siteid.siteid }}">{{ tag.svcid.svcid }}</a></td>
+		<td>{{ tag.tagname }}</td>
+		<td>{{ tag.tagvalue }}</td>
+	    </tr>
+    {% endfor %}
+</table>
+</div>
+
+
+        {% block pages %}
+        <div id="pages">
+        {% if room.has_previous %}
+                {% if curl %}
+                <a href="{{ curl }}&page={{ room.previous_page_number }}">上一页</a>
+                {% else %}
+                <a href="?page={{ room.previous_page_number }}" >上一页</a>
+                {% endif %}
+        {% else %}
+                上一页
+        {% endif %}第{{ room.number }}页
+        {% if room.has_next %}
+                {% if curl %}
+                <a href="{{ curl }}&page={{ room.next_page_number }}">下一页</a>
+                {% else %}
+                <a href="?page={{ room.next_page_number }}">下一页</a>
+                {% endif %}
+        {% else %}
+                下一页
+        {% endif %}
+        <span style="margin-left:20px">共 {{ room.paginator.num_pages }} 页 合计 {{ room.paginator.count }} 条记录</span>
+        </div>
+        {% endblock %}

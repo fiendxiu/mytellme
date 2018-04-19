@@ -1,0 +1,106 @@
+{% extends "parent/base_cid.html" %}
+
+{% block addcid %}
+<div style="float:right">
+        <a href="/cidadd/" style="margin-right:40px">新增CID</a>
+</div>
+{% endblock %}
+
+{% block editcidhead %}
+        <th>操作</th>
+{% endblock %}
+{% block editcidbody %}
+        <td>
+                <a href="/cidedit/{{ cid.cid }}" style="margin-right:40px"><span class="glyphicon glyphicon-edit"></span></a>
+                <a href="/delete/cid/{{ cid.cid }}" style="margin-right:40px"><span class="glyphicon glyphicon-trash"></span></a>
+                <a href="/siteadd/{{ cid.cid }}" style="margin-right:40px"><span class="glyphicon glyphicon-plus"></span></a>
+        </td>
+{% endblock %}
+
+{% block editsitehead %}
+	<th>操作</th>
+{% endblock %}
+
+{% block editsitebody %}
+	<td>
+		<a href="/siteedit/{{ site.siteid }}"><span class="glyphicon glyphicon-edit"></span></a>
+                <a href="/delete/site/{{ site.siteid }}"><span class="glyphicon glyphicon-trash"></span></a>
+		<div class="dropdown">
+	                <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span></a>
+			<ul class="dropdown-menu">
+				<li><a href="/add/fast/{{ site.siteid }}">Fastip</a>
+                                <li><a href="/add/flan/{{ site.siteid }}">组网</a>
+                                <li><a href="/add/local/{{ site.siteid }}">厂商线路</a>
+                                <li><a href="/add/nni/{{ site.siteid }}">NNI</a>
+                                <li><a href="/add/si/{{ site.siteid }}">SI</a>
+                                <li><a href="/add/monitor/{{ site.siteid }}">监控</a>
+                        </ul>
+		</div> 
+	</td>
+{% endblock %}
+
+{% block editfasthead %}
+        <th>操作</th>	
+{% endblock %}
+{% block editfastbody %}
+<td>
+	<a href="/edit/fast/{{ fast.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-edit"></span></a>
+	<a href="/delete/fast/{{ fast.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-trash"></span></a>
+	<a href="/tag/fast/{{ fast.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-link"></span></a>
+</td>
+{% endblock %}
+
+{% block editflanhead %}
+        <th>操作</th>
+{% endblock %}
+{% block editflanbody %}
+<td>
+        <a href="/edit/flan/{{ flan.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-edit"></span></a>
+        <a href="/delete/flan/{{ flan.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="/tag/flan/{{ flan.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-link"></span></a>
+</td>
+{% endblock %}
+
+{% block editlocalhead %}
+        <th>操作</th>
+{% endblock %}
+{% block editlocalbody %}
+<td>
+        <a href="/edit/local/{{ local.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-edit"></span></a>
+        <a href="/delete/local/{{ local.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="/tag/local/{{ local.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-link"></span></a>
+</td>
+{% endblock %}
+
+{% block editnnihead %}
+        <th>操作</th>
+{% endblock %}
+{% block editnnibody %}
+<td>
+        <a href="/edit/nni/{{ nni.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-edit"></span></a>
+        <a href="/delete/nni/{{ nni.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="/tag/nni/{{ nni.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-link"></span></a>
+</td>
+{% endblock %}
+
+{% block editsihead %}
+        <th>操作</th>
+{% endblock %}
+{% block editsibody %}
+<td>
+        <a href="/edit/si/{{ si.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-edit"></span></a>
+        <a href="/delete/si/{{ si.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="/tag/si/{{ si.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-link"></span></a>
+</td>
+{% endblock %}
+
+{% block editmonitorhead %}
+        <th>操作</th>
+{% endblock %}
+{% block editmonitorbody %}
+<td>
+        <a href="/edit/monitor/{{ monitor.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-edit"></span></a>
+        <a href="/delete/monitor/{{ monitor.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="/tag/monitor/{{ monitor.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-link"></span></a>
+</td>
+{% endblock %}

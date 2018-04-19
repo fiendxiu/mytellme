@@ -1,0 +1,34 @@
+{% extends "parent/base_cid.html" %}
+
+{% block contact_key %}
+{% endblock %}
+{% block contact_value %}
+{% endblock %}
+
+{% block editfasthead %}
+        <th>操作</th>
+{% endblock %}
+{% block editfastbody %}
+<td>
+        <a href="/fastedit/{{ fast.svcid }}" style="margin-right:40px">QC</a>
+        <a href="/fast/{{ fast.svcid }}" style="margin-right:40px">TICKET</a>
+</td>
+{% endblock %}
+
+{% block editflanhead %}
+        <th>操作</th>
+{% endblock %}
+{% block editflanbody %}
+<td>
+        <a href="/fast/{{ fast.svcid }}" style="margin-right:40px">TICKET</a>
+</td>
+{% endblock %}
+
+{% block editlocalhead %}
+        <th>操作</th>
+{% endblock %}
+{% block editlocalbody %}
+<td>
+        <a href="/fast/{{ fast.svcid }}" style="margin-right:40px">TICKET</a>
+</td>
+{% endblock %}

@@ -1,0 +1,177 @@
+{% include "parent/base_filehead.html" %}
+	{% include "parent/base_head.html" %}
+
+        <div id="svctag" style="margin-top:20px">
+                {% ifequal svc 'fast' %}
+                <table class="table table-bordered">
+                        <tr style="background:#eee">
+                                <th>FASTIP</th>
+                        </tr>
+                        <tr style="background:#eee">
+                                <th>ID</th>
+                                <th>PE</th>
+                                <th>接口</th>
+                                <th>WAN IP</th>
+                                <th>HK IP</th>
+                                <th>带宽</th>
+                                <th>备PE</th>
+                                <th>备接口</th>
+                                <th>备WANIP</th>
+                                <th>公司服务编号</th>
+                                <th>状态</th>
+                        </tr>
+                        <tr>
+                                <td>{{ svcdata.svcid }}</td>
+                                <td>{{ svcdata.fastpe }}</td>
+                                <td>{{ svcdata.fastport }}</td>
+                                <td>{{ svcdata.fastwanip }}</td>
+                                <td>{{ svcdata.hkip }}</td>
+                                <td>{{ svcdata.bandwidth }}</td>
+                                <td>{{ svcdata.bkpe }}</td>
+                                <td>{{ svcdata.bkport }}</td>
+                                <td>{{ svcdata.bkwanip }}</td>
+                                <td>{{ svcdata.servicenumber }}</td>
+                                <td>{{ svcdata.status }}</td>
+                        </tr>
+                </table>
+                {% endifequal %}
+		{% ifequal svc 'flan' %}
+                <table class="table table-bordered">
+                        <tr style="background:#eee">
+                                <th>组网</th>
+                        </tr>
+                        <tr style="background:#eee">
+                                <th>ID</th>
+                                <th>PE</th>
+                                <th>接口</th>
+                                <th>WAN IP</th>
+                                <th>LAN IP</th>
+                                <th>带宽</th>
+                                <th>备PE</th>
+                                <th>备接口</th>
+                                <th>备WANIP</th>
+                                <th>公司服务编号</th>
+                                <th>状态</th>
+                        </tr>
+                        <tr>
+                                <td>{{ svcdata.svcid }}</td>
+                                <td>{{ svcdata.flanpe }}</td>
+                                <td>{{ svcdata.flanport }}</td>
+                                <td>{{ svcdata.flanwanip }}</td>
+                                <td>{{ svcdata.lanip }}</td>
+                                <td>{{ svcdata.bandwidth }}</td>
+                                <td>{{ svcdata.bkpe }}</td>
+                                <td>{{ svcdata.bkport }}</td>
+                                <td>{{ svcdata.bkwanip }}</td>
+                                <td>{{ svcdata.servicenumber }}</td>
+                                <td>{{ svcdata.status }}</td>
+                        </tr>
+                </table>
+		{% endifequal %}
+                {% ifequal svc 'local' %}
+                <table class="table table-bordered">
+                        <tr style="background:#eee">
+                                <th>厂商线路</th>
+                        </tr>
+                        <tr style="background:#eee">
+                                <th>ID</th>
+                                <th>厂商</th>
+                                <th>上传/下载</th>
+                                <th>报障信息</th>
+                                <th>A端地址</th>
+                                <th>B端地址</th>
+                                <th>线路编号</th>
+                                <th>公司服务编号</th>
+                                <th>状态</th>
+                        </tr>
+                        <tr>
+                                <td>{{ svcdata.svcid }}</td>
+                                <td>{{ svcdata.localsp }}</td>
+                                <td>{{ svcdata.bandwidth }}</td>
+                                <td>{{ svcdata.localguard }}</td>
+                                <td>{{ svcdata.localaddra }}</td>
+                                <td>{{ svcdata.localaddrb }}</td>
+                                <td>{{ svcdata.localnumber }}</td>
+                                <td>{{ svcdata.servicenumber }}</td>
+                                <td>{{ svcdata.status }}</td>
+                        </tr>
+                </table>
+                {% endifequal %}
+                {% ifequal svc 'si' %}
+                <table class="table table-bordered">
+                        <tr style="background:#eee">
+                                <th>SI</th>
+                        </tr>
+                        <tr style="background:#eee">
+                                <th>ID</th>
+                                <th>服务项</th>
+                                <th>服务清单</th>
+                                <th>公司服务编号</th>
+                                <th>状态</th>
+                        </tr>
+                        <tr>
+                                <td>{{ svcdata.svcid }}</td>
+                                <td>{{ svcdata.siname }}</td>
+                                <td>{{ svcdata.sicontent }}</td>
+                                <td>{{ svcdata.servicenumber }}</td>
+                                <td>{{ svcdata.status }}</td>
+                        </tr>
+                </table>
+                {% endifequal %}
+                {% ifequal svc 'monitor' %}
+                <table class="table table-bordered">
+                        <tr style="background:#eee">
+                                <th>监控</th>
+                        </tr>
+                        <tr style="background:#eee">
+                                <th>ID</th>
+                                <th>监控对象</th>
+                                <th>监控IP</th>
+                                <th>状态</th>
+                        </tr>
+                        <tr>
+                                <td>{{ svcdata.svcid }}</td>
+                                <td>{{ svcdata.monitorobj }}</td>
+                                <td>{{ svcdata.monitorip }}</td>
+                                <td>{{ svcdata.status }}</td>
+                        </tr>
+                </table>
+                {% endifequal %}
+
+                <table class="table table-bordered  table-condensed" style="margin-top:-20px">
+                        <tr style="background:#eee">
+                                <th>标签名</th>
+                                <th>标签值</th>
+                                <th>操作</th>
+                        </tr>
+                        {% for tag in tagdata %}
+                        <tr>
+                                <td>{{ tag.tagname }}</td>
+                                <td>{{ tag.tagvalue }}</td>
+                                <td><a href="/delete/{{ svc }}tag/{{ tag.id }}" style="margin-right:40px"><span class="glyphicon glyphicon-trash"></span></a></td>
+                        </tr>
+                        {% endfor %}
+                </table>
+
+                <form method="post" class="form-horizontal">{% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                                {{ field.label }}
+                        </label> 
+                        <div class="col-sm-6">
+                                {{ field }}
+                                {% if field.help_text %}
+                                <p class="help-inline"><small>{{ field.help_text }}</small></p>
+                                {% endif %}
+                        </div>
+                </div>
+                {% endfor %}
+                        <div class="col-sm-offset-2 col-sm-6">
+                                <a class="btn btn-primary" href="/cid/{{ svcdata.siteid.cid.cid }}/?collapse={{ svcdata.siteid.siteid }}">返回</a>
+                                <button class="btn btn-primary" type="submit">添加</button>
+                        </div>
+                </form>
+        </div>
+</body>
+</html>
