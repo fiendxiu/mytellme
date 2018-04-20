@@ -21,6 +21,10 @@ then
 else
     echo "Please attention, Your system selinux is enforcing"
     read -p "Do you want to disabled selinux?[yes/no]": shut
+    if [ ! $shut ]
+    then
+    shut=yes
+    fi
     case $shut in
         yes|y|Y|YES)
             setenforce 0
