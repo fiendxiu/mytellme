@@ -50,11 +50,12 @@ rm -f /usr/bin/python
 sed -i "s/\/usr\/bin\/python/\/usr\/bin\/python2.7/" /usr/bin/yum
 sed -i "s/\/usr\/bin\/python/\/usr\/bin\/python2.7/" /usr/libexec/urlgrabber-ext-down
 pip install gnureadline
+ln -s /usr/local/python3/bin/python3.6 /usr/bin/python
+ln -s /usr/local/python3/bin/pip3.6 /usr/bin/pip
 
 
 # 安装Django2.0
 echo "####install django2.0####"
-export PATH="$PATH:/usr/local/python3/bin"
 pip install django==2.0
 sed -i 's/export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL/export PATH="$PATH:\/usr\/local\/python3\/bin" USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL/' /etc/profile
 
@@ -117,11 +118,12 @@ python manage.py makemigrations
 python manage.py migrate
 echo "please create your tellme' super admin:"
 python manage.py createsuperuser
-scp $adminset_dir/install/server/tellme.service /usr/lib/systemd/system
+scp $tellme_dir/install/server/tellme.service /usr/lib/systemd/system
 systemctl daemon-reload
 chkconfig tellme on
 service tellme start
 pip install gunicorn
+ln -s /usr/local/python3/bin/gunicoren /usr/bin/gunicore
 
 
 # 安装nginx
@@ -142,5 +144,5 @@ service mariadb restart
 service tellme restart
 service sshd restart
 echo "please access website http://server_ip"
-echo "you have installed adminset successfully!!!"
+echo "you have installed tellme successfully!!!"
 echo "################################################"
