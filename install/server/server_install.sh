@@ -114,7 +114,7 @@ sed -i "s/if version/\#if version/" /usr/local/python3/lib/python3.6/site-packag
 echo "####install tellme####"
 cd $tellme_dir
 pip install Pillow
-python manage.py makemigrations
+python manage.py makemigrations tellme
 python manage.py migrate
 echo "please create your tellme' super admin:"
 python manage.py createsuperuser
