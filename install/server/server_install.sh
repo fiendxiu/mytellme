@@ -126,6 +126,7 @@ pip install gunicorn
 
 # 安装nginx
 echo "####install nginx####"
+yum -y install epel-release
 yum install nginx -y
 chkconfig nginx on
 scp $tellme_dir/install/server/nginx/tellme.conf /etc/nginx/conf.d
