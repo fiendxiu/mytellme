@@ -47,8 +47,6 @@ tar xf Python-3.6.3.tar.xz && cd Python-3.6.3
 ./configure --prefix=/usr/local/python3
 make && make install
 rm -f /usr/bin/python
-ln -s /usr/local/python3/bin/python3.6 /usr/bin/python
-ln -s /usr/local/python3/bin/pip3 /usr/bin/pip
 sed -i "s/\/usr\/bin\/python/\/usr\/bin\/python2.7/" /usr/bin/yum
 sed -i "s/\/usr\/bin\/python/\/usr\/bin\/python2.7/" /usr/libexec/urlgrabber-ext-down
 pip install gnureadline
@@ -56,6 +54,7 @@ pip install gnureadline
 
 # 安装Django2.0
 echo "####install django2.0####"
+export PATH="$PATH:/usr/local/python3/bin"
 pip install django==2.0
 sed -i 's/export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL/export PATH="$PATH:\/usr\/local\/python3\/bin" USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL/' /etc/profile
 
@@ -123,7 +122,6 @@ systemctl daemon-reload
 chkconfig tellme on
 service tellme start
 pip install gunicorn
-ln -s /usr/local/python3/bin/gunicorn /usr/bin/gunicorn
 
 
 # 安装nginx
