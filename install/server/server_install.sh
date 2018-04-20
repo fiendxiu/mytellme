@@ -127,7 +127,7 @@ systemctl daemon-reload
 chkconfig tellme on
 service tellme start
 pip install gunicorn
-ln -s /usr/local/python3/bin/gunicoren /usr/bin/gunicore
+ln -s /usr/local/python3/bin/gunicorn /usr/bin/gunicorn
 
 
 # 安装nginx
