@@ -32,7 +32,7 @@ class clscid:
 
     def getreports(self,cid):
         reportnum = 0
-        path = "/opt/workspace/static/report/"+str(cid)+"/"
+        path = "static/report/"+str(cid)+"/"
         try:
             for report in os.listdir(path):
                 reportpath = os.path.join(path,report)

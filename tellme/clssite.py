@@ -34,7 +34,7 @@ class clssite:
 
     def getimages(self,siteid):
         imagenum = 0
-        path = "/opt/workspace/static/image/"+siteid+"/"
+        path = "static/image/"+siteid+"/"
         try:
             for image in os.listdir(path):
                 imagepath = os.path.join(path,image)

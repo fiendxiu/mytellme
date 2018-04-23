@@ -285,7 +285,7 @@ def trashfile(request,type,id):
             file = ""
         try:
             trace_del(file,request.user.username)
-            os.remove('/opt/workspace/'+str(filepath))
+            os.remove(str(filepath))
             file.delete()
         except:
             errors = "删除数据库或文件的操作，异常！"
