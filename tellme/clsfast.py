@@ -4,7 +4,8 @@ class clsfast:
     def __init__(self,svcid):
         self.svcid = svcid
         self.objstate = False
-        self.fasttag = {}
+        #self.fasttag = {}
+        self.tags = []
         fastinfo = Fastline.objects.filter(svcid=self.svcid)
         for fast in fastinfo:
             self.objstate = True
@@ -25,4 +26,5 @@ class clsfast:
     def gettags(self):
         tags = Fasttag.objects.filter(svcid=self.svcid)
         for tag in tags:
-            self.fasttag[tag.tagname] = tag.tagvalue
+            #self.fasttag[tag.tagname] = tag.tagvalue
+            self.tags.append([tag.tagname,tag.tagvalue])
