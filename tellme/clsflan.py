@@ -4,7 +4,7 @@ class clsflan:
     def __init__(self,svcid):
         self.svcid = svcid
         self.objstate = False
-        self.flantag = {}
+        self.flantag = []
         flaninfo = Flanline.objects.filter(svcid=self.svcid)
         for flan in flaninfo:
             self.objstate = True
@@ -25,4 +25,4 @@ class clsflan:
     def gettags(self):
         tags = Flantag.objects.filter(svcid=self.svcid)
         for tag in tags:
-            self.flantag[tag.tagname] = tag.tagvalue
+            self.flantag.append([tag.tagname, tag.tagvalue])

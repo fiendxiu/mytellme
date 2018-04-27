@@ -4,7 +4,7 @@ class clsnni:
     def __init__(self,svcid):
         self.svcid = svcid
         self.objstate = False
-        self.nnitag = {}
+        self.nnitag = []
         nniinfo = NNIline.objects.filter(svcid=self.svcid)
         for nni in nniinfo:
             self.objstate = True
@@ -25,4 +25,4 @@ class clsnni:
     def gettags(self):
         tags = NNItag.objects.filter(svcid=self.svcid)
         for tag in tags:
-            self.nnitag[tag.tagname] = tag.tagvalue
+            self.nnitag.append([tag.tagname, tag.tagvalue])

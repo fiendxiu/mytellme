@@ -4,7 +4,7 @@ class clslocal:
     def __init__(self,svcid):
         self.svcid = svcid
         self.objstate = False
-        self.localtag = {}
+        self.localtag = []
         localinfo = Localline.objects.filter(svcid=self.svcid)
         for local in localinfo:
             self.objstate = True
@@ -24,4 +24,4 @@ class clslocal:
     def gettags(self):
         tags = Localtag.objects.filter(svcid=self.svcid)
         for tag in tags:
-            self.localtag[tag.tagname] = tag.tagvalue
+            self.localtag.append([tag.tagname, tag.tagvalue])

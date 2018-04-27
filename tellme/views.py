@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from tellme.models import *
 from django.db import IntegrityError
 from tellme.clscid import clscid
-from tellme.clsform import Jituanform,Cidform,Siteform,Fastform,Flanform,Localform,NNIform,Siform,Monitorform,Fasttagform,Flantagform,Localtagform,NNItagform,Sitagform,Monitortagform,Photoform,Reportform
+from tellme.clsform import Jituanform,Cidform,Siteform,Fastform,Flanform,Localform,NNIform,Siform,Fastnetform,Monitorform,Fasttagform,Flantagform,Localtagform,NNItagform,Sitagform,Fastnettagform,Monitortagform,Photoform,Reportform
 from tellme.tracemodel import trace_add,trace_edit,trace_del
 import os,re
 
@@ -121,6 +121,8 @@ def search(request):
                         data['nni'] = tempdata.exclude(status__exact="OFF")
                         tempdata = Siline.objects.filter(servicenumber__icontains=q)
                         data['si'] = tempdata.exclude(status__exact="OFF")
+                        tempdata = Fastnetline.objects.filter(servicenumber__icontains=q)
+                        data['fastnet'] = tempdata.exclude(status__exact="OFF")
                     else:
                         data = []
                         data += Fastline.objects.filter(servicenumber__icontains=q)
@@ -128,6 +130,7 @@ def search(request):
                         data += Localline.objects.filter(servicenumber__icontains=q)
                         data += NNIline.objects.filter(servicenumber__icontains=q)
                         data += Siline.objects.filter(servicenumber__icontains=q)
+                        data += Fastnetline.objects.filter(servicenumber__icontains=q)
                     room = paging(data,request.GET.get('page','1'))
                     type = 'service'
                 elif info == "localnumber":
@@ -145,6 +148,7 @@ def search(request):
                     data += Localtag.objects.filter(tagvalue__icontains=q)
                     data += NNItag.objects.filter(tagvalue__icontains=q)
                     data += Sitag.objects.filter(tagvalue__icontains=q)
+                    data += Fastnettag.objects.filter(tagvalue__icontains=q)
                     data += Monitortag.objects.filter(tagvalue__icontains=q)
                     room = paging(data,request.GET.get('page','1'))
                     type = 'tag'
@@ -223,6 +227,9 @@ def delete(request,url,id):
             elif url == "si":
                 Del = get_object_or_404(Siline,pk=id)
                 cid = Del.siteid.cid.cid
+            elif url == "fastnet":
+                Del = get_object_or_404(Fastnetline,pk=id)
+                cid = Del.siteid.cid.cid
             elif url == "monitor":
                 Del = get_object_or_404(Monitorline,pk=id)
                 cid = Del.siteid.cid.cid
@@ -246,6 +253,10 @@ def delete(request,url,id):
                 Del = get_object_or_404(Sitag,pk=id)
                 svc = "si"
                 svcid = Del.svcid.svcid
+            elif url == "fastnettag":
+                Del = get_object_or_404(Fastnettag,pk=id)
+                svc = "fastnet"
+                svcid = Del.svcid.svcid
             elif url == "monitortag":
                 Del = get_object_or_404(Monitortag,pk=id)
                 svc = "monitor"
@@ -263,7 +274,7 @@ def delete(request,url,id):
                     return HttpResponseRedirect('/jtid/')
                 elif url in ["cid","site"]:
                     return HttpResponseRedirect('/cid/'+str(cid))
-                elif url in ["fast","flan","local","nni","si","monitor"]:
+                elif url in ["fast","flan","local","nni","si","fastnet","monitor"]:
                     return HttpResponseRedirect('/cid/'+str(cid)+'/?collapse='+Del.siteid.siteid)
                 else:
                     return HttpResponseRedirect('/tag/'+svc+'/'+svcid+'/')
@@ -457,6 +468,9 @@ def svc_add(request,svc,id):
                 elif svc == 'si':
                     request.POST['svcid']=id+request.POST['svcid']
                     form = Siform(request.POST)
+                elif svc == 'fastnet':
+                    request.POST['svcid']=id+request.POST['svcid']
+                    form = Fastnetform(request.POST)
                 elif svc == 'monitor':
                     request.POST['svcid']=id+request.POST['svcid']
                     form = Monitorform(request.POST)
@@ -506,6 +520,8 @@ def svc_add(request,svc,id):
                 form = NNIform()
             elif svc == 'si':
                 form = Siform()
+            elif svc == 'fastnet':
+                form = Fastnetform()
             elif svc == 'monitor':
                 form = Monitorform()
             else:
@@ -537,6 +553,9 @@ def svc_edit(request,svc,id):
             elif svc == 'si':
                 Modelsurl = get_object_or_404(Siline,pk=id)
                 mb = get_object_or_404(Siline,pk=id)
+            elif svc == 'fastnet':
+                Modelsurl = get_object_or_404(Fastnetline,pk=id)
+                mb = get_object_or_404(Fastnetline,pk=id)
             elif svc == 'monitor':
                 Modelsurl = get_object_or_404(Monitorline,pk=id)
                 mb = get_object_or_404(Monitorline,pk=id)
@@ -555,6 +574,8 @@ def svc_edit(request,svc,id):
                     form = NNIform(request.POST,instance=Modelsurl)
                 elif svc == 'si':
                     form = Siform(request.POST,instance=Modelsurl)
+                elif svc == 'fastnet':
+                    form = Fastnetform(request.POST,instance=Modelsurl)
                 elif svc == 'monitor':
                     form = Monitorform(request.POST,instance=Modelsurl)
                 if form.is_valid():
@@ -603,6 +624,8 @@ def svc_edit(request,svc,id):
                 form = NNIform(instance=Modelsurl)
             elif svc == 'si':
                 form = Siform(instance=Modelsurl)
+            elif svc == 'fastnet':
+                form = Fastnetform(instance=Modelsurl)
             elif svc == 'monitor':
                 form = Monitorform(instance=Modelsurl)
             else:
@@ -628,6 +651,8 @@ def tag(request,svc,id):
                     form = NNItagform(request.POST)
                 elif svc == 'si':
                     form = Sitagform(request.POST)
+                elif svc == 'fastnet':
+                    form = Fastnettagform(request.POST)
                 elif svc == 'monitor':
                     form = Monitortagform(request.POST)
                 if form.is_valid():
@@ -661,6 +686,11 @@ def tag(request,svc,id):
                 svcdata = Siline.objects.get(svcid=id)
                 form = Sitagform()
                 form.fields['svcid'].queryset = Siline.objects.filter(svcid=id)
+            elif svc == 'fastnet':
+                tagdata = Fastnettag.objects.filter(svcid=id).all()
+                svcdata = Fastnetline.objects.get(svcid=id)
+                form = Fastnettagform()
+                form.fields['svcid'].queryset = Fastnetline.objects.filter(svcid=id)
             elif svc == 'monitor':
                 tagdata = Monitortag.objects.filter(svcid=id).all()
                 svcdata = Monitorline.objects.get(svcid=id)

@@ -4,7 +4,7 @@ class clsmonitor:
     def __init__(self,svcid):
         self.svcid = svcid
         self.objstate = False
-        self.monitortag = {}
+        self.monitortag = []
         monitorinfo = Monitorline.objects.filter(svcid=self.svcid)
         for monitor in monitorinfo:
             self.objstate = True
@@ -18,4 +18,4 @@ class clsmonitor:
     def gettags(self):
         tags = Monitortag.objects.filter(svcid=self.svcid)
         for tag in tags:
-            self.monitortag[tag.tagname] = tag.tagvalue
+            self.monitortag.append([tag.tagname, tag.tagvalue])

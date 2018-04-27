@@ -4,7 +4,7 @@ class clssi:
     def __init__(self,svcid):
         self.svcid = svcid
         self.objstate = False
-        self.sitag = {}
+        self.sitag = []
         siinfo = Siline.objects.filter(svcid=self.svcid)
         for si in siinfo:
             self.objstate = True
@@ -19,4 +19,4 @@ class clssi:
     def gettags(self):
         tags = Sitag.objects.filter(svcid=self.svcid)
         for tag in tags:
-            self.sitag[tag.tagname] = tag.tagvalue
+            self.sitag.append([tag.tagname, tag.tagvalue])

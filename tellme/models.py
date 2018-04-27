@@ -44,11 +44,11 @@ class Site(models.Model):
     cid = models.ForeignKey(Cid,on_delete=models.PROTECT)
     siteid = models.CharField(u'SiteID' ,max_length=20,primary_key=True)
     sitename = models.CharField(u'站点名', max_length=255)
-    siteaddr = models.CharField(u'地址', max_length=255, blank=True)
+    siteaddr = models.TextField(u'地址', blank=True)
     mastercontact = models.CharField(u'主联络人', max_length=20, blank=True)
     masterphone = models.CharField(u'主联络电话', max_length=20, blank=True)
     masteremail = models.EmailField(u'主联络Email', blank=True)
-    ocontacts = models.CharField(u'其他联系信息', max_length=255, blank=True)
+    ocontacts = models.TextField(u'更多联系信息/备注信息', blank=True)
     status = models.CharField(u'站点状态', max_length=8,choices=STATUS_CHOICES,default=u'ON_TEST')
     create_date = models.DateTimeField(u'创建日期',default=timezone.now)
     mod_date = models.DateTimeField(u'最后修改日期', auto_now = True)
@@ -85,12 +85,12 @@ class Fastline(models.Model):
     svcid = models.CharField(u'FastID' ,max_length=20,primary_key=True)
     fastpe = models.CharField(u'FastPE', max_length=50)
     fastport = models.CharField(u'接口', max_length=20,blank=True)
-    fastwanip = models.CharField(u'WAN_IP', max_length=20, blank=True)
+    fastwanip = models.CharField(u'WAN_IP', max_length=128, blank=True)
     hkip = models.TextField(u'HK_IP', blank=True)
     bandwidth = models.CharField(u'带宽', max_length=50)
     bkpe = models.CharField(u'备PE', max_length=50,blank=True)
     bkport = models.CharField(u'备接口', max_length=20,blank=True)
-    bkwanip = models.CharField(u'备WANIP', max_length=20, blank=True)
+    bkwanip = models.CharField(u'备WANIP', max_length=128, blank=True)
     servicenumber = models.CharField(u'公司服务编号', max_length=50, blank=True)
     status = models.CharField(u'状态', max_length=8,choices=STATUS_CHOICES,default=u'ON_TEST')
     create_date = models.DateTimeField(u'创建日期',default=timezone.now)
@@ -105,13 +105,13 @@ class Flanline(models.Model):
     svcid = models.CharField(u'组网ID' ,max_length=20,primary_key=True)
     flanpe = models.CharField(u'FlanPE', max_length=50)
     flanport = models.CharField(u'接口', max_length=20,blank=True)
-    flanwanip = models.CharField(u'WAN_IP', max_length=20, blank=True)
-    lanip = models.CharField(u'LAN_IP', max_length=255, blank=True)
+    flanwanip = models.CharField(u'WAN_IP', max_length=128, blank=True)
+    lanip = models.TextField(u'LAN_IP', blank=True)
     bandwidth = models.CharField(u'带宽', max_length=50)
     bkpe = models.CharField(u'备PE', max_length=50,blank=True)
     bkport = models.CharField(u'备接口', max_length=20,blank=True)
-    bkwanip = models.CharField(u'备WANIP', max_length=20, blank=True)
-    servicenumber = models.CharField(u'公司服务编号', max_length=50, blank=True)
+    bkwanip = models.CharField(u'备WANIP', max_length=128, blank=True)
+    servicenumber = models.CharField(u'公司服务编号(主/备)', max_length=120, blank=True)
     status = models.CharField(u'状态', max_length=8,choices=STATUS_CHOICES,default=u'ON_TEST')
     create_date = models.DateTimeField(u'创建日期',default=timezone.now)
     mod_date = models.DateTimeField(u'最后修改日期', auto_now = True)
@@ -123,8 +123,8 @@ class Flanline(models.Model):
 class Localline(models.Model):
     siteid = models.ForeignKey(Site,on_delete=models.PROTECT)
     svcid = models.CharField(u'ID', max_length=20,primary_key=True)
-    bandwidth = models.CharField(u'带宽', max_length=50)
-    localsp = models.CharField(u'运营商', max_length=50, blank=True)
+    bandwidth = models.CharField(u'上传/下载', max_length=50)
+    localsp = models.CharField(u'厂商/线路类型', max_length=50, blank=True)
     localname = models.CharField(u'报障名义', max_length=255, blank=True)
     localguard = models.CharField(u'报障信息', max_length=255, blank=True)
     localaddra = models.CharField(u'A端地址', max_length=255, blank=True)
@@ -144,7 +144,7 @@ class NNIline(models.Model):
     svcid = models.CharField(u'ID' ,max_length=20,primary_key=True)
     pe = models.CharField(u'PE', max_length=50)
     port = models.CharField(u'接口', max_length=20,blank=True)
-    wanip = models.CharField(u'WAN_IP', max_length=20, blank=True)
+    wanip = models.CharField(u'WAN_IP', max_length=128, blank=True)
     bandwidth = models.CharField(u'带宽', max_length=50, blank=True)
     nnisp = models.CharField(u'运营商', max_length=50, blank=True)
     nniname = models.CharField(u'报障名义', max_length=255, blank=True)
@@ -173,11 +173,26 @@ class Siline(models.Model):
     class Meta:
         ordering = ['-svcid']
 
+class Fastnetline(models.Model):
+    siteid = models.ForeignKey(Site,on_delete=models.PROTECT)
+    svcid = models.CharField(u'ID' ,max_length=20,primary_key=True)
+    pe = models.CharField(u'PE', max_length=50)
+    usedip = models.CharField(u'使用的IP', max_length=128, blank=True)
+    domain = models.CharField(u'域名', max_length=255, blank=True)
+    description = models.TextField(u'描述', blank=True)
+    servicenumber = models.CharField(u'公司服务编号', max_length=50, blank=True)
+    create_date = models.DateTimeField(u'创建日期',default=timezone.now)
+    mod_date = models.DateTimeField(u'最后修改日期', auto_now = True)
+    def __str__(self):
+        return  u'%s --- %s ' % (self.siteid,self.svcid)
+    class Meta:
+        ordering = ['-svcid']
+
 class Monitorline(models.Model):
     siteid = models.ForeignKey(Site,on_delete=models.PROTECT)
-    svcid = models.CharField(u'监控ID' ,max_length=20,primary_key=True)
-    monitorobj = models.CharField(u'监控对象', max_length=50)
-    monitorip = models.CharField(u'监控IP', max_length=20)
+    svcid = models.CharField(u'ID' ,max_length=20,primary_key=True)
+    monitorobj = models.CharField(u'对象', max_length=50)
+    monitorip = models.CharField(u'IP', max_length=20)
     status = models.CharField(u'状态', max_length=8,choices=STATUS_CHOICES,default=u'ON_TEST')
     create_date = models.DateTimeField(u'创建日期',default=timezone.now)
     mod_date = models.DateTimeField(u'最后修改日期', auto_now = True)
@@ -188,6 +203,17 @@ class Monitorline(models.Model):
 
 class Monitortag(models.Model):
     svcid = models.ForeignKey(Monitorline,on_delete=models.PROTECT)
+    tagname = models.CharField(u'标签名' ,max_length=50)
+    tagvalue = models.CharField(u'标签值' ,max_length=255)
+    create_date = models.DateTimeField(u'创建日期',default=timezone.now)
+    mod_date = models.DateTimeField(u'最后修改日期', auto_now = True)
+    def __str__(self):
+        return  u'%s --- %s --- %s ' % (self.svcid,self.tagname,self.tagvalue)
+    class Meta:
+        ordering = ['create_date']
+
+class Fastnettag(models.Model):
+    svcid = models.ForeignKey(Fastnetline,on_delete=models.PROTECT)
     tagname = models.CharField(u'标签名' ,max_length=50)
     tagvalue = models.CharField(u'标签值' ,max_length=255)
     create_date = models.DateTimeField(u'创建日期',default=timezone.now)

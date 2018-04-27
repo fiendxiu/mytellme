@@ -1,10 +1,11 @@
 import os
-from tellme.models import Site,Fastline,Flanline,Localline,NNIline,Siline,Monitorline
+from tellme.models import Site,Fastline,Flanline,Localline,NNIline,Siline,Fastnetline,Monitorline
 from tellme.clsfast import clsfast
 from tellme.clsflan import clsflan
 from tellme.clslocal import clslocal
 from tellme.clsnni import clsnni
 from tellme.clssi import clssi
+from tellme.clsfastnet import clsfastnet
 from tellme.clsmonitor import clsmonitor
 
 class clssite:
@@ -17,6 +18,7 @@ class clssite:
         self.local = []
         self.nni = []
         self.si = []
+        self.fastnet = []
         self.monitor = []
         siteinfo = Site.objects.filter(siteid=self.siteid)
         for site in siteinfo:
@@ -64,6 +66,10 @@ class clssite:
         siinfo = Siline.objects.filter(siteid=self.siteid)
         for si in siinfo:
             self.si.append(clssi(si.svcid))
+
+        fastnetinfo = Fastnetline.objects.filter(siteid=self.siteid)
+        for fastnet in fastnetinfo:
+            self.fastnet.append(clsfastnet(fastnet.svcid))
 
         monitorinfo = Monitorline.objects.filter(siteid=self.siteid)
         for monitor in monitorinfo:

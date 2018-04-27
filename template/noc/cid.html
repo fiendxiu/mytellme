@@ -33,7 +33,8 @@
                                 <li><a href="/add/local/{{ site.siteid }}">厂商线路</a>
                                 <li><a href="/add/nni/{{ site.siteid }}">NNI</a>
                                 <li><a href="/add/si/{{ site.siteid }}">SI</a>
-                                <li><a href="/add/monitor/{{ site.siteid }}">监控</a>
+                                <li><a href="/add/fastnet/{{ site.siteid }}">FASTNET</a>
+                                <li><a href="/add/monitor/{{ site.siteid }}">自建组网</a>
                         </ul>
 		</div> 
 	</td>
@@ -91,6 +92,17 @@
         <a href="/edit/si/{{ si.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-edit"></span></a>
         <a href="/delete/si/{{ si.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-trash"></span></a>
         <a href="/tag/si/{{ si.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-link"></span></a>
+</td>
+{% endblock %}
+
+{% block editfastnethead %}
+        <th>操作</th>
+{% endblock %}
+{% block editfastnetbody %}
+<td>
+        <a href="/edit/fastnet/{{ fastnet.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-edit"></span></a>
+        <a href="/delete/fastnet/{{ fastnet.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-trash"></span></a>
+        <a href="/tag/fastnet/{{ fastnet.svcid }}" style="margin-right:40px"><span class="glyphicon glyphicon-link"></span></a>
 </td>
 {% endblock %}
 

@@ -64,7 +64,7 @@
 				<th>主联系人</th>
 				<th>主联系电话</th>
 				<th>主联系电邮</th>
-				<th>更多联系信息</th>
+				<th>更多联系信息/备注信息</th>
 				{% endblock %}
 				<th>服务内容</th>
 				<th>文件</th>
@@ -92,8 +92,9 @@
                                 {% if site.flan %}<span class="label label-primary">组网</span>{% endif %}
 				{% if site.nni %}<span class="label label-primary">NNI</span>{% endif %}
                                 {% if site.local %}<span class="label label-primary">厂商线路</span>{% endif %}
+                                {% if site.fastnet %}<span class="label label-primary">FASTNET</span>{% endif %}
                                 {% if site.si %}<span class="label label-primary">SI</span>{% endif %}
-                                {% if site.monitor %}<span class="label label-primary">监控线路</span>{% endif %}</td>
+                                {% if site.monitor %}<span class="label label-primary">自建组网</span>{% endif %}</td>
 				<td><a href="/photo/{{ site.siteid }}" target="_blank"><span class="glyphicon glyphicon-picture"></span><span class="badge">{{ site.images }}</span></a></td>
 				<td>{{ site.status }}</td>
 				{% block editsitebody %} {% endblock %}
@@ -132,14 +133,14 @@
 				</tr>
                                 {% for fast in site.fast %}
 				<tr>
-					<td>{% if fast.tags %}
+					<td>{% if fast.fasttag %}
                                         <div class="dropdown">
                                                 <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ fast.svcid }}</a><span class="label label-info">tag</span>
                                                 <ul class="dropdown-menu">
                                                         <!--{% for tagname,tagvalue in fast.fasttag.items %}
                                                         <li><b>{{ tagname }}</b><a>{{ tagvalue }}</a>
                                                         {% endfor %}-->
-                                                        {% for tag in fast.tags %}
+                                                        {% for tag in fast.fasttag %}
                                                         <li><b>{{ tag.0 }}</b><a>{{ tag.1 }}</a>
                                                         {% endfor %}
                                                 </ul>
@@ -177,7 +178,7 @@
                                         <th>备PE</th>
                                         <th>备接口</th>
                                         <th>备WANIP</th>
-                                        <th>公司服务编号</th>
+                                        <th>公司服务编号(主/备)</th>
                                         <th>状态</th>
 					{% block editflanhead %}{% endblock %}
                                 </tr>
@@ -187,9 +188,9 @@
 			                <div class="dropdown">
                         			<a href="" class="dropdown-toggle" data-toggle="dropdown">{{ flan.svcid }}</a><span class="label label-info">tag</span>
                         			<ul class="dropdown-menu">
-                        				{% for tagname,tagvalue in flan.flantag.items %}
-				                        <li><b>{{ tagname }}</b><a>{{ tagvalue }}</a>
-				                        {% endfor %}
+                                                        {% for tag in flan.flantag %}
+                                                        <li><b>{{ tag.0 }}</b><a>{{ tag.1 }}</a>
+                                                        {% endfor %}
                         			</ul>
                 			</div>    
                                         {% else %}{{ flan.svcid }}{% endif %}
@@ -235,8 +236,8 @@
                                         <div class="dropdown">
                                                 <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ nni.svcid }}</a><span class="label label-info">tag</span>
                                                 <ul class="dropdown-menu">
-                                                        {% for tagname,tagvalue in nni.nnitag.items %}
-                                                        <li><b>{{ tagname }}</b><a>{{ tagvalue }}</a>
+                                                        {% for tag in nni.nnitag %}
+                                                        <li><b>{{ tag.0 }}</b><a>{{ tag.1 }}</a>
                                                         {% endfor %}
                                                 </ul>
                                         </div>
@@ -253,6 +254,44 @@
                                         <td>{{ nni.nninumber }}</td>
                                         <td>{{ nni.servicenumber }}</td>
                                         {% block editnnibody %}{% endblock %}
+                                </tr>
+                                {% endfor %}
+                        </table>
+                        {% endblock %}
+                        {% endif %}{% if site.fastnet %}
+                        {% block fastnet_service %}
+                        <table class="table table-bordered table-hover">
+                                <tr style="background:#eee">
+                                        <th>FASTNET</th>
+                                </tr>
+                                <tr style="background:#eee">
+                                        <th>ID</th>
+                                        <th>PE</th>
+                                        <th>使用的IP</th>
+                                        <th>域名</th>
+                                        <th>具体信息</th>
+                                        <th>公司服务编号</th>
+                                        {% block editfastnethead %}{% endblock %}
+                                </tr>
+                                {% for fastnet in site.fastnet %}
+                                <tr>
+                                        <td>{% if fastnet.fastnettag %}
+                                        <div class="dropdown">
+                                                <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ fastnet.svcid }}</a><span class="label label-info">tag</span>
+                                                <ul class="dropdown-menu">
+                                                        {% for tag in fastnet.fastnettag %}
+                                                        <li><b>{{ tag.0 }}</b><a>{{ tag.1 }}</a>
+                                                        {% endfor %}
+                                                </ul>
+                                        </div>
+                                        {% else %}{{ fastnet.svcid }}{% endif %}
+                                        </td>
+                                        <td>{{ fastnet.pe }}</td>
+                                        <td>{{ fastnet.usedip }}</td>
+                                        <td>{{ fastnet.domain }}</td>
+                                        <td>{{ fastnet.description }}</td>
+                                        <td>{{ fastnet.servicenumber }}</td>
+                                        {% block editfastnetbody %}{% endblock %}
                                 </tr>
                                 {% endfor %}
                         </table>
@@ -282,8 +321,8 @@
                                         <div class="dropdown">
                                                 <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ local.svcid }}</a><span class="label label-info">tag</span>
                                                 <ul class="dropdown-menu">
-                                                        {% for tagname,tagvalue in local.localtag.items %}
-                                                        <li><b>{{ tagname }}</b><a>{{ tagvalue }}</a>
+                                                        {% for tag in local.localtag %}
+                                                        <li><b>{{ tag.0 }}</b><a>{{ tag.1 }}</a>
                                                         {% endfor %}
                                                 </ul>
                                         </div>
@@ -323,8 +362,8 @@
                                         <div class="dropdown">
                                                 <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ si.svcid }}</a><span class="label label-info">tag</span>
                                                 <ul class="dropdown-menu">
-                                                        {% for tagname,tagvalue in si.sitag.items %}
-                                                        <li><b>{{ tagname }}</b><a>{{ tagvalue }}</a>
+                                                        {% for tag in si.sitag %}
+                                                        <li><b>{{ tag.0 }}</b><a>{{ tag.1 }}</a>
                                                         {% endfor %}
                                                 </ul>
                                         </div>
@@ -343,12 +382,12 @@
                         {% block monitor_service %}
                         <table class="table table-bordered table-hover">
                                 <tr style="background:#eee">
-                                        <th>监控线路</th>
+                                        <th>自建组网</th>
                                 </tr>
                                 <tr style="background:#eee">
                                         <th>ID</th>
-                                        <th>监控对象</th>
-                                        <th>监控IP</th>
+                                        <th>对象</th>
+                                        <th>IP</th>
                                         <th>状态</th>
 					{% block editmonitorhead %}{% endblock %}
                                 </tr>
@@ -358,8 +397,8 @@
                                         <div class="dropdown">
                                                 <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ monitor.svcid }}</a><span class="label label-info">tag</span>
                                                 <ul class="dropdown-menu">
-                                                        {% for tagname,tagvalue in monitor.monitortag.items %}
-                                                        <li><b>{{ tagname }}</b><a>{{ tagvalue }}</a>
+                                                        {% for tag in monitor.monitortag %}
+                                                        <li><b>{{ tag.0 }}</b><a>{{ tag.1 }}</a>
                                                         {% endfor %}
                                                 </ul>
                                         </div>
