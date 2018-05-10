@@ -10,6 +10,7 @@ STATUS_CHOICES = (
     (u'ON', u'ON'),
     (u'OFF',u'OFF'),
     (u'ON_TEST',u'ON_TEST'),
+    (u'OFF_TEST',u'OFF_TEST'),
 )
 
 class Jituan(models.Model):
@@ -84,12 +85,12 @@ class Fastline(models.Model):
     siteid = models.ForeignKey(Site,on_delete=models.PROTECT)
     svcid = models.CharField(u'FastID' ,max_length=20,primary_key=True)
     fastpe = models.CharField(u'FastPE', max_length=50)
-    fastport = models.CharField(u'接口', max_length=20,blank=True)
+    fastport = models.CharField(u'接口', max_length=50,blank=True)
     fastwanip = models.CharField(u'WAN_IP', max_length=128, blank=True)
     hkip = models.TextField(u'HK_IP', blank=True)
     bandwidth = models.CharField(u'带宽', max_length=50)
     bkpe = models.CharField(u'备PE', max_length=50,blank=True)
-    bkport = models.CharField(u'备接口', max_length=20,blank=True)
+    bkport = models.CharField(u'备接口', max_length=50,blank=True)
     bkwanip = models.CharField(u'备WANIP', max_length=128, blank=True)
     servicenumber = models.CharField(u'公司服务编号', max_length=50, blank=True)
     status = models.CharField(u'状态', max_length=8,choices=STATUS_CHOICES,default=u'ON_TEST')
@@ -104,12 +105,12 @@ class Flanline(models.Model):
     siteid = models.ForeignKey(Site,on_delete=models.PROTECT)
     svcid = models.CharField(u'组网ID' ,max_length=20,primary_key=True)
     flanpe = models.CharField(u'FlanPE', max_length=50)
-    flanport = models.CharField(u'接口', max_length=20,blank=True)
+    flanport = models.CharField(u'接口', max_length=50,blank=True)
     flanwanip = models.CharField(u'WAN_IP', max_length=128, blank=True)
     lanip = models.TextField(u'LAN_IP', blank=True)
     bandwidth = models.CharField(u'带宽', max_length=50)
     bkpe = models.CharField(u'备PE', max_length=50,blank=True)
-    bkport = models.CharField(u'备接口', max_length=20,blank=True)
+    bkport = models.CharField(u'备接口', max_length=50,blank=True)
     bkwanip = models.CharField(u'备WANIP', max_length=128, blank=True)
     servicenumber = models.CharField(u'公司服务编号(主/备)', max_length=120, blank=True)
     status = models.CharField(u'状态', max_length=8,choices=STATUS_CHOICES,default=u'ON_TEST')
@@ -143,7 +144,7 @@ class NNIline(models.Model):
     siteid = models.ForeignKey(Site,on_delete=models.PROTECT)
     svcid = models.CharField(u'ID' ,max_length=20,primary_key=True)
     pe = models.CharField(u'PE', max_length=50)
-    port = models.CharField(u'接口', max_length=20,blank=True)
+    port = models.CharField(u'接口', max_length=50,blank=True)
     wanip = models.CharField(u'WAN_IP', max_length=128, blank=True)
     bandwidth = models.CharField(u'带宽', max_length=50, blank=True)
     nnisp = models.CharField(u'运营商', max_length=50, blank=True)
