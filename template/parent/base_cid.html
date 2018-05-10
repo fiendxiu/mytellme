@@ -69,6 +69,7 @@
 				<th>服务内容</th>
 				<th>文件</th>
 				<th>状态</th>
+                                <th>创建时间</th>
 				{% block editsitehead %}{% endblock %}
 			</tr>
                         {% for site in cid.site %}
@@ -97,6 +98,7 @@
                                 {% if site.monitor %}<span class="label label-primary">自建组网</span>{% endif %}</td>
 				<td><a href="/photo/{{ site.siteid }}" target="_blank"><span class="glyphicon glyphicon-picture"></span><span class="badge">{{ site.images }}</span></a></td>
 				<td>{{ site.status }}</td>
+                                <td>{{ site.create_date }}</td>
 				{% block editsitebody %} {% endblock %}
 			</tr>
                         {% endfor %}
@@ -129,6 +131,7 @@
                                         <th>备WANIP</th>
 					<th>公司服务编号</th>
 					<th>状态</th>
+                                	<th>创建时间</th>
 					{% block editfasthead %}{% endblock %}
 				</tr>
                                 {% for fast in site.fast %}
@@ -157,6 +160,7 @@
                                         <td>{{ fast.bkwanip }}</td>
 					<td>{{ fast.servicenumber }}</td>
 					<td>{{ fast.status }}</td>
+                                	<td>{{ fast.create_date }}</td>
 					{% block editfastbody %}{% endblock %}
 				</tr>
                                 {% endfor %}
@@ -180,6 +184,7 @@
                                         <th>备WANIP</th>
                                         <th>公司服务编号(主/备)</th>
                                         <th>状态</th>
+                                        <th>创建时间</th>
 					{% block editflanhead %}{% endblock %}
                                 </tr>
                                 {% for flan in site.flan %}
@@ -205,6 +210,7 @@
                                         <td>{{ flan.bkwanip }}</td>
                                         <td>{{ flan.servicenumber }}</td>
                                         <td>{{ flan.status }}</td>
+                                        <td>{{ flan.create_date }}</td>
 					{% block editflanbody %}{% endblock %}
                                 </tr>
                                 {% endfor %}
@@ -228,6 +234,7 @@
 					<th>POP地址</th>
 					<th>线路编号</th>
                                         <th>公司服务编号</th>
+                                        <th>创建时间</th>
                                         {% block editnnihead %}{% endblock %}
                                 </tr>
                                 {% for nni in site.nni %}
@@ -253,6 +260,7 @@
                                         <td>{{ nni.nniaddr }}</td>
                                         <td>{{ nni.nninumber }}</td>
                                         <td>{{ nni.servicenumber }}</td>
+                                        <td>{{ nni.create_date }}</td>
                                         {% block editnnibody %}{% endblock %}
                                 </tr>
                                 {% endfor %}
@@ -271,6 +279,7 @@
                                         <th>域名</th>
                                         <th>具体信息</th>
                                         <th>公司服务编号</th>
+                                        <th>创建时间</th>
                                         {% block editfastnethead %}{% endblock %}
                                 </tr>
                                 {% for fastnet in site.fastnet %}
@@ -291,6 +300,7 @@
                                         <td>{{ fastnet.domain }}</td>
                                         <td>{{ fastnet.description }}</td>
                                         <td>{{ fastnet.servicenumber }}</td>
+                                        <td>{{ fastnet.create_date }}</td>
                                         {% block editfastnetbody %}{% endblock %}
                                 </tr>
                                 {% endfor %}
@@ -313,6 +323,7 @@
                                         <th>线路编号</th>
                                         <th>公司服务编号</th>
                                         <th>状态</th>
+                                        <th>创建时间</th>
                                         {% block editlocalhead %}{% endblock %}
                                 </tr>
                                 {% for local in site.local %}
@@ -337,6 +348,7 @@
                                         <td>{{ local.localnumber }}</td>
                                         <td>{{ local.servicenumber }}</td>
                                         <td>{{ local.status }}</td>
+                                        <td>{{ local.create_date }}</td>
                                         {% block editlocalbody %}{% endblock %}
                                 </tr>
                                 {% endfor %}
@@ -354,6 +366,7 @@
 					<th>服务清单</th>
 					<th>公司服务编号</th>
 					<th>状态</th>
+                                        <th>创建时间</th>
 					{% block editsihead %}{% endblock %}
 				</tr>
                                 {% for si in site.si %}
@@ -373,6 +386,7 @@
 					<td>{{ si.sicontent }}</td>
 					<td>{{ si.servicenumber }}</td>
 					<td>{{ si.status }}</td>
+                                        <td>{{ si.create_date }}</td>
 					{% block editsibody %}{% endblock %}
 				</tr>
                                 {% endfor %}
@@ -389,6 +403,7 @@
                                         <th>对象</th>
                                         <th>IP</th>
                                         <th>状态</th>
+                                        <th>创建时间</th>
 					{% block editmonitorhead %}{% endblock %}
                                 </tr>
                                 {% for monitor in site.monitor %}
@@ -407,6 +422,7 @@
                                         <td>{{ monitor.monitorobj }}</td>
                                         <td>{{ monitor.monitorip }}</td>
                                         <td>{{ monitor.status }}</td>
+                                        <td>{{ monitor.create_date }}</td>
 					{% block editmonitorbody %}{% endblock %}
                                 </tr>
                                 {% endfor %}
