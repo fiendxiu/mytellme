@@ -13,6 +13,9 @@ from tellme.tracemodel import trace_add,trace_edit,trace_del
 import os,re
 
 # Create your views here.
+FASTPES=['-','VPS','dga-fastip1','dga-fastip2','dgb-fastip1','dgb-fastip2','dgb-fastip3','dgb-flr1','dgb-flr1共享','dgb-flr2','dgb-bpflr1','szb-fastip1','szb-sfastip1','szb-flr1','szb-flr2','hkh-fastip1','hkh-flr1','hkh-flr2','hkh-us1','sza-flr3','sha-fastip1','sha-flr1','sha-flr2','sha-flr3','sha-flr4']
+FLANPES=['-','dga-acvpnpe1','dga-vpnpe1','dgb-acvpnpe1','dgb-vpnpe1','sza-vpnpe1','szb-acvpnpe1','szb-vpnpe1','sha-acvpnpe1','sha-vpnpe1','hka-vpnpe1','hkh-acvpnpe1','hkh-vpnpe1','gza-vpnpe1','twb-vpnpe1','鹏博士PE']
+BKPES=['-','dga-vpnbk1','dgb-bk1','szb-bk1','鹏博士PE']
 
 @csrf_exempt
 def login_view(request):
@@ -529,7 +532,7 @@ def svc_add(request,svc,id):
             if form:
                 form.fields['siteid'].queryset = Site.objects.filter(siteid=id)
                 form.fields['siteid'].initial = Site.objects.filter(siteid=id)[0].siteid
-                return render(request,'noc/svcadd.html',{'form':form,'portformat':portformat})
+                return render(request,'noc/svcadd.html',{'form':form,'portformat':portformat,'fastpes':FASTPES,'flanpes':FLANPES,'bkpes':BKPES})
         else:
             return render(request,'index.html')
     return HttpResponseRedirect('/login/')
@@ -631,7 +634,7 @@ def svc_edit(request,svc,id):
             else:
                 form = ""
             if form:
-                return render(request,'noc/svcedit.html',{'form':form,'id':id,'cid':cid,'portformat':portformat})
+                return render(request,'noc/svcedit.html',{'form':form,'id':id,'cid':cid,'portformat':portformat,'fastpes':FASTPES,'flanpes':FLANPES,'bkpes':BKPES})
         else:
             return render(request,'index.html')
     return HttpResponseRedirect('/login/')

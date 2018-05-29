@@ -16,15 +16,49 @@
 		<form method="post" class="form-horizontal">{% csrf_token %}
 		{% for field in form %}
                 <div class="form-group">
-			<label class="col-sm-2 control-label">
-				{{ field.label }}
-			</label> 
-			<div class="col-sm-6">
+                    {% ifequal field.name 'fastpe' %}
+                    <label class="col-sm-2 control-label">{{ field.label }}</label>
+                    <div class="col-sm-6">
+                        {{ field }}
+                        <select id="fastpes" onchange="select_fastpe()">
+                            {% for pe in fastpes %}
+                            <option>{{ pe }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% else %}
+                        {% ifequal field.name 'flanpe' %}
+                        <label class="col-sm-2 control-label">{{ field.label }}</label>
+                        <div class="col-sm-6">
+                            {{ field }}
+                            <select id="flanpes" onchange="select_flanpe()">
+                                {% for pe in flanpes %}
+                                <option>{{ pe }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {% else %}
+                            {% ifequal field.name 'bkpe' %}
+                            <label class="col-sm-2 control-label">{{ field.label }}</label>
+                            <div class="col-sm-6">
+                                {{ field }}
+                                <select id="bkpes" onchange="select_bkpe()">
+                                    {% for pe in bkpes %}
+                                    <option>{{ pe }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            {% else %}
+			    <label class="col-sm-2 control-label">{{ field.label }}</label> 
+			    <div class="col-sm-6">
 				{{ field }}
 				{% if field.help_text %}
 				<p class="help-inline"><small>{{ field.help_text }}</small></p>
 				{% endif %}
-			</div>
+			    </div>
+                            {% endifequal %}
+                        {% endifequal %}
+                    {% endifequal %}
 		</div>
 		{% endfor %}
                 <div class="form-group">

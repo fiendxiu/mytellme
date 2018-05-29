@@ -13,30 +13,63 @@
                                                 <th>{{ field.label }}</th>
                                                 <td>{{ field.value }}</td>
                                                	{% else %}
-							{% ifequal field.name 'fastport' %}
+							{% ifequal field.name 'fastpe' %}
 							<th>{{ field.label }}</th>
-							<td>
-								{{ field }}
-								{% if portformat %}
-								{% else %}
-								<span style="margin-left:20px">*tunnel类型的接口必须是Tunnel123，tun123，vtun123的格式</span>
-								{% endif %}
+							<td>{{ field }}
+								<select id="fastpes" onchange="select_fastpe()">
+									{% for pe in fastpes %}
+									<option>{{ pe }}</option>
+									{% endfor %}
+								</select>
 							</td>
 							{% else %}
-								{% ifequal field.name 'flanport' %}
-								<th>{{ field.label }}</th>
-								<td>
-									{{ field }}
-									{% if portformat %}
-									{% else %}
-									<span style="margin-left:20px">*tunnel类型的接口必须是Tunnel123，tun123>，vtun123的格式</span>
-									{% endif %}
-								</td>
-								{% else %}
-								<th>{{ field.label }}</th>
-								<td>{{ field }}</td>
+	                                                        {% ifequal field.name 'flanpe' %}
+        	                                                <th>{{ field.label }}</th>
+                	                                        <td>{{ field }}
+                        	                                        <select id="flanpes" onchange="select_flanpe()">
+                                	                                        {% for pe in flanpes %}
+                                        	                                <option>{{ pe }}</option>
+                                                	                        {% endfor %}
+                                                        	        </select>
+	                                                        </td>   
+        	                                                {% else %}
+		                                                        {% ifequal field.name 'bkpe' %}
+                		                                        <th>{{ field.label }}</th>
+                                		                        <td>{{ field }}
+                                                		                <select id="bkpes" onchange="select_bkpe()">
+		                                                                        {% for pe in bkpes %}
+                		                                                        <option>{{ pe }}</option>
+                                		                                        {% endfor %}
+                                                		                </select>
+		                                                        </td>   
+                		                                        {% else %}
+										{% ifequal field.name 'fastport' %}
+										<th>{{ field.label }}</th>
+										<td>
+											{{ field }}
+											{% if portformat %}
+											{% else %}
+											<span style="margin-left:20px">*tunnel类型的接口必须是Tunnel123，tun123，vtun123的格式</span>
+											{% endif %}
+										</td>
+										{% else %}
+											{% ifequal field.name 'flanport' %}
+											<th>{{ field.label }}</th>
+											<td>
+												{{ field }}
+												{% if portformat %}
+												{% else %}
+												<span style="margin-left:20px">*tunnel类型的接口必须是Tunnel123，tun123>，vtun123的格式</span>
+												{% endif %}
+											</td>
+											{% else %}
+											<th>{{ field.label }}</th>
+											<td>{{ field }}</td>
+											{% endifequal %}
+				                                        	{% endifequal %}
+									{% endifequal %}
 								{% endifequal %}
-	                                        	{% endifequal %}
+							{% endifequal %}
 						{% endifequal %}
 					{% endifequal %}
 				</tr>
