@@ -11,7 +11,7 @@
 {% block editfastbody %}
 <td>
         <a href="/fastedit/{{ fast.svcid }}" style="margin-right:40px">QC</a>
-        <a href="/fast/{{ fast.svcid }}" style="margin-right:40px">TICKET</a>
+        <a href="http://newticket.fnetlink.com:10082/opennew.php?stuser={{ user }}&lineid={{ fast.svcid }}&linewanip={{ fast.fastwanip }}&contractname={{ cid.contractname }}&sitecontact={{ site.mastercontact }}&sitephone={{ site.masterphone }}&email={{ cid.sales }}" rel="external" style="margin-right:40px" target="_blank">TICKET</a>
 </td>
 {% endblock %}
 
@@ -20,7 +20,7 @@
 {% endblock %}
 {% block editflanbody %}
 <td>
-        <a href="/fast/{{ fast.svcid }}" style="margin-right:40px">TICKET</a>
+        <a href="http://newticket.fnetlink.com:10082/opennew.php?stuser={{ user }}&lineid={{ flan.svcid }}&linewanip={{ flan.flanwanip }}&contractname={{ cid.contractname }}&sitecontact={{ site.mastercontact }}&sitephone={{ site.masterphone }}&email={{ cid.sales }}" rel="external" style="margin-right:40px" target="_blank">TICKET</a>
 </td>
 {% endblock %}
 
@@ -29,6 +29,6 @@
 {% endblock %}
 {% block editlocalbody %}
 <td>
-        <a href="/fast/{{ fast.svcid }}" style="margin-right:40px">TICKET</a>
+        <a href="http://newticket.fnetlink.com:10082/opennew.php?stuser={{ user }}&lineid={{ local.svcid }}&linewanip={{ local.localsp }}&contractname={{ cid.contractname }}&sitecontact={{ site.mastercontact }}&sitephone={{ site.masterphone }}&email={{ cid.sales }}" rel="external" style="margin-right:40px" target="_blank">TICKET</a>
 </td>
 {% endblock %}

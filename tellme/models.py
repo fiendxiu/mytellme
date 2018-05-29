@@ -93,6 +93,7 @@ class Fastline(models.Model):
     bkport = models.CharField(u'备接口', max_length=50,blank=True)
     bkwanip = models.CharField(u'备WANIP', max_length=128, blank=True)
     servicenumber = models.CharField(u'公司服务编号', max_length=50, blank=True)
+    engineer = models.CharField(u'工程师', max_length=100, blank=True)
     status = models.CharField(u'状态', max_length=8,choices=STATUS_CHOICES,default=u'ON_TEST')
     create_date = models.DateTimeField(u'创建日期',default=timezone.now)
     mod_date = models.DateTimeField(u'最后修改日期', auto_now = True)
@@ -113,6 +114,7 @@ class Flanline(models.Model):
     bkport = models.CharField(u'备接口', max_length=50,blank=True)
     bkwanip = models.CharField(u'备WANIP', max_length=128, blank=True)
     servicenumber = models.CharField(u'公司服务编号(主/备)', max_length=120, blank=True)
+    engineer = models.CharField(u'工程师', max_length=100, blank=True)
     status = models.CharField(u'状态', max_length=8,choices=STATUS_CHOICES,default=u'ON_TEST')
     create_date = models.DateTimeField(u'创建日期',default=timezone.now)
     mod_date = models.DateTimeField(u'最后修改日期', auto_now = True)
@@ -153,6 +155,7 @@ class NNIline(models.Model):
     nniaddr = models.CharField(u'POP地址', max_length=255, blank=True)
     nninumber = models.CharField(u'线路编号', max_length=50, blank=True)
     servicenumber = models.CharField(u'公司服务编号', max_length=50, blank=True)
+    engineer = models.CharField(u'工程师', max_length=100, blank=True)
     create_date = models.DateTimeField(u'创建日期',default=timezone.now)
     mod_date = models.DateTimeField(u'最后修改日期', auto_now = True)
     def __str__(self):

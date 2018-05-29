@@ -25,21 +25,6 @@ for id in IDS:
     FASTNETID.append(('_FN'+str(id),'_FN'+str(id)))
     MONITORID.append(('_CM'+str(id),'_CM'+str(id)))
 
-FASTPE=[]
-FASTPES=['-','VPS','dga-fastip1','dga-fastip2','dgb-fastip1','dgb-fastip2','dgb-fastip3','dgb-flr1','dgb-flr2','dgb-bpflr1','szb-fastip1','szb-sfastip1','szb-flr1','szb-flr2','hkh-fastip1','hkh-flr1','hkh-flr2','hkh-us1','sza-flr3','sha-fastip1','sha-flr1','sha-flr2','sha-flr3','sha-flr4']
-for pe in FASTPES:
-    FASTPE.append((pe,pe))
-
-FLANPE=[]
-FLANPES=['-','dga-acvpnpe1','dga-vpnpe1','dgb-acvpnpe1','dgb-vpnpe1','sza-vpnpe1','szb-acvpnpe1','szb-vpnpe1','sha-acvpnpe1','sha-vpnpe1','hka-vpnpe1','hkh-acvpnpe1','hkh-vpnpe1','gza-vpnpe1','twb-vpnpe1','鹏博士PE']
-for pe in FLANPES:
-    FLANPE.append((pe,pe))
-
-BKPE=[]
-BKPES=['-','dga-vpnbk1','dgb-bk1','szb-bk1','鹏博士PE']
-for bkpe in BKPES:
-    BKPE.append((bkpe,bkpe))
-
 FASTNETPE=[]
 FASTNETPES=['-','dga-fastnet1','dgb-fastnet1']
 for pe in FASTNETPES:
@@ -79,9 +64,7 @@ class Fastform(ModelForm):
         exclude = ['mod_date']
         widgets = {
             'svcid': Select(choices=FASTID),
-            'fastpe': Select(choices=FASTPE),
             'hkip': Textarea(attrs={'cols': 25, 'rows': 3}),
-            'bkpe': Select(choices=BKPE),
         }
 
 class Flanform(ModelForm):
@@ -90,8 +73,6 @@ class Flanform(ModelForm):
         exclude = ['mod_date']
         widgets = {
             'svcid': Select(choices=FLANID),
-            'flanpe': Select(choices=FLANPE),
-            'bkpe': Select(choices=BKPE),
             'lanip': Textarea(attrs={'cols': 40, 'rows': 4}),
         }
 

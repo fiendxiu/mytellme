@@ -17,6 +17,7 @@ class clsflan:
             self.bkport = flan.bkport
             self.bkwanip = flan.bkwanip
             self.servicenumber = flan.servicenumber
+            self.engineer = flan.engineer
             self.status = flan.status
             self.create_date = flan.create_date
             self.mod_date = flan.mod_date

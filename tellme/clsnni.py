@@ -18,6 +18,7 @@ class clsnni:
             self.nniaddr = nni.nniaddr
             self.nninumber = nni.nninumber
             self.servicenumber = nni.servicenumber
+            self.engineer = nni.engineer
             self.create_date = nni.create_date
             self.mod_date = nni.mod_date
             self.gettags()

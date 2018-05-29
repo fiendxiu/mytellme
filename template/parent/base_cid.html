@@ -91,11 +91,11 @@
                                 {% endblock %}
 				<td>{% if site.fast %}<span class="label label-primary">FASTIP</span>{% endif %}
                                 {% if site.flan %}<span class="label label-primary">组网</span>{% endif %}
-				{% if site.nni %}<span class="label label-primary">NNI</span>{% endif %}
+				{% if site.nni %}<span class="label label-primary">UNI/NNI</span>{% endif %}
                                 {% if site.local %}<span class="label label-primary">厂商线路</span>{% endif %}
                                 {% if site.fastnet %}<span class="label label-primary">FASTNET</span>{% endif %}
                                 {% if site.si %}<span class="label label-primary">SI</span>{% endif %}
-                                {% if site.monitor %}<span class="label label-primary">自建组网</span>{% endif %}</td>
+                                {% if site.monitor %}<span class="label label-primary">监控</span>{% endif %}</td>
 				<td><a href="/photo/{{ site.siteid }}" target="_blank"><span class="glyphicon glyphicon-picture"></span><span class="badge">{{ site.images }}</span></a></td>
 				<td>{{ site.status }}</td>
                                 <td>{{ site.create_date }}</td>
@@ -130,6 +130,7 @@
                                         <th>备接口</th>
                                         <th>备WANIP</th>
 					<th>公司服务编号</th>
+                                        <th>工程师</th>
 					<th>状态</th>
                                 	<th>创建时间</th>
 					{% block editfasthead %}{% endblock %}
@@ -159,6 +160,7 @@
                                         <td>{{ fast.bkport }}</td>
                                         <td>{{ fast.bkwanip }}</td>
 					<td>{{ fast.servicenumber }}</td>
+                                        <td>{{ fast.engineer }}</td>
 					<td>{{ fast.status }}</td>
                                 	<td>{{ fast.create_date }}</td>
 					{% block editfastbody %}{% endblock %}
@@ -183,6 +185,7 @@
                                         <th>备接口</th>
                                         <th>备WANIP</th>
                                         <th>公司服务编号(主/备)</th>
+                                        <th>工程师</th>
                                         <th>状态</th>
                                         <th>创建时间</th>
 					{% block editflanhead %}{% endblock %}
@@ -209,6 +212,7 @@
                                         <td>{{ flan.bkport }}</td>
                                         <td>{{ flan.bkwanip }}</td>
                                         <td>{{ flan.servicenumber }}</td>
+                                        <td>{{ flan.engineer }}</td>
                                         <td>{{ flan.status }}</td>
                                         <td>{{ flan.create_date }}</td>
 					{% block editflanbody %}{% endblock %}
@@ -220,7 +224,7 @@
                         {% block nni_service %}
                         <table class="table table-bordered table-hover">
                                 <tr style="background:#eee">
-                                        <th>NNI</th>
+                                        <th>UNI/NNI</th>
                                 </tr>
                                 <tr style="background:#eee">
                                         <th>ID</th>
@@ -234,6 +238,7 @@
 					<th>POP地址</th>
 					<th>线路编号</th>
                                         <th>公司服务编号</th>
+                                        <th>工程师</th>
                                         <th>创建时间</th>
                                         {% block editnnihead %}{% endblock %}
                                 </tr>
@@ -260,6 +265,7 @@
                                         <td>{{ nni.nniaddr }}</td>
                                         <td>{{ nni.nninumber }}</td>
                                         <td>{{ nni.servicenumber }}</td>
+                                        <td>{{ nni.engineer }}</td>
                                         <td>{{ nni.create_date }}</td>
                                         {% block editnnibody %}{% endblock %}
                                 </tr>
@@ -396,7 +402,7 @@
                         {% block monitor_service %}
                         <table class="table table-bordered table-hover">
                                 <tr style="background:#eee">
-                                        <th>自建组网</th>
+                                        <th>监控</th>
                                 </tr>
                                 <tr style="background:#eee">
                                         <th>ID</th>
