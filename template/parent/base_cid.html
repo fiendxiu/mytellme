@@ -130,6 +130,7 @@
                                         <th>备接口</th>
                                         <th>备WANIP</th>
 					<th>公司服务编号</th>
+                                        <th>合同编号</th>
                                         <th>工程师</th>
 					<th>状态</th>
                                 	<th>创建时间</th>
@@ -160,6 +161,7 @@
                                         <td>{{ fast.bkport }}</td>
                                         <td>{{ fast.bkwanip }}</td>
 					<td>{{ fast.servicenumber }}</td>
+                                        <td>{{ fast.contractnumber }}</td>
                                         <td>{{ fast.engineer }}</td>
 					<td>{{ fast.status }}</td>
                                 	<td>{{ fast.create_date }}</td>
@@ -185,6 +187,7 @@
                                         <th>备接口</th>
                                         <th>备WANIP</th>
                                         <th>公司服务编号(主/备)</th>
+                                        <th>合同编号</th>
                                         <th>工程师</th>
                                         <th>状态</th>
                                         <th>创建时间</th>
@@ -212,6 +215,7 @@
                                         <td>{{ flan.bkport }}</td>
                                         <td>{{ flan.bkwanip }}</td>
                                         <td>{{ flan.servicenumber }}</td>
+                                        <td>{{ flan.contractnumber }}</td>
                                         <td>{{ flan.engineer }}</td>
                                         <td>{{ flan.status }}</td>
                                         <td>{{ flan.create_date }}</td>
@@ -238,6 +242,7 @@
 					<th>POP地址</th>
 					<th>线路编号</th>
                                         <th>公司服务编号</th>
+                                        <th>合同编号</th>
                                         <th>工程师</th>
                                         <th>创建时间</th>
                                         {% block editnnihead %}{% endblock %}
@@ -265,6 +270,7 @@
                                         <td>{{ nni.nniaddr }}</td>
                                         <td>{{ nni.nninumber }}</td>
                                         <td>{{ nni.servicenumber }}</td>
+                                        <td>{{ nni.contractnumber }}</td>
                                         <td>{{ nni.engineer }}</td>
                                         <td>{{ nni.create_date }}</td>
                                         {% block editnnibody %}{% endblock %}
@@ -285,6 +291,7 @@
                                         <th>域名</th>
                                         <th>具体信息</th>
                                         <th>公司服务编号</th>
+                                        <th>合同编号</th>
                                         <th>创建时间</th>
                                         {% block editfastnethead %}{% endblock %}
                                 </tr>
@@ -306,6 +313,7 @@
                                         <td>{{ fastnet.domain }}</td>
                                         <td>{{ fastnet.description }}</td>
                                         <td>{{ fastnet.servicenumber }}</td>
+                                        <td>{{ fastnet.contractnumber }}</td>
                                         <td>{{ fastnet.create_date }}</td>
                                         {% block editfastnetbody %}{% endblock %}
                                 </tr>
@@ -328,6 +336,7 @@
                                         <th>B端地址</th>
                                         <th>线路编号</th>
                                         <th>公司服务编号</th>
+                                        <th>合同编号</th>
                                         <th>状态</th>
                                         <th>创建时间</th>
                                         {% block editlocalhead %}{% endblock %}
@@ -353,6 +362,7 @@
                                         <td>{{ local.localaddrb }}</td>
                                         <td>{{ local.localnumber }}</td>
                                         <td>{{ local.servicenumber }}</td>
+                                        <td>{{ local.contractnumber }}</td>
                                         <td>{{ local.status }}</td>
                                         <td>{{ local.create_date }}</td>
                                         {% block editlocalbody %}{% endblock %}
@@ -371,6 +381,7 @@
 					<th>服务项</th>
 					<th>服务清单</th>
 					<th>公司服务编号</th>
+                                        <th>合同编号</th>
 					<th>状态</th>
                                         <th>创建时间</th>
 					{% block editsihead %}{% endblock %}
@@ -391,6 +402,7 @@
 					<td>{{ si.siname }}</td>
 					<td>{{ si.sicontent }}</td>
 					<td>{{ si.servicenumber }}</td>
+                                        <td>{{ si.contractnumber }}</td>
 					<td>{{ si.status }}</td>
                                         <td>{{ si.create_date }}</td>
 					{% block editsibody %}{% endblock %}

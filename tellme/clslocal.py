@@ -15,6 +15,7 @@ class clslocal:
             self.localaddrb = local.localaddrb
             self.bandwidth = local.bandwidth
             self.servicenumber = local.servicenumber
+            self.contractnumber = local.contractnumber
             self.localnumber = local.localnumber
             self.status = local.status
             self.create_date = local.create_date

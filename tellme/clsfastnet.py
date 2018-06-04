@@ -13,6 +13,7 @@ class clsfastnet:
             self.domain = fastnet.domain
             self.description = fastnet.description
             self.servicenumber = fastnet.servicenumber
+            self.contractnumber = fastnet.contractnumber
             self.create_date = fastnet.create_date
             self.mod_date = fastnet.mod_date
             self.gettags()

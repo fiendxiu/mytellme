@@ -11,6 +11,7 @@ class clssi:
             self.siname = si.siname
             self.sicontent = si.sicontent
             self.servicenumber = si.servicenumber
+            self.contractnumber = si.contractnumber
             self.status = si.status
             self.create_date = si.create_date
             self.mod_date = si.mod_date

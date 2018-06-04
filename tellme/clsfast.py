@@ -17,6 +17,7 @@ class clsfast:
             self.bkwanip = fast.bkwanip
             self.bandwidth = fast.bandwidth
             self.servicenumber = fast.servicenumber
+            self.contractnumber = fast.contractnumber
             self.engineer = fast.engineer
             self.status = fast.status
             self.create_date = fast.create_date
